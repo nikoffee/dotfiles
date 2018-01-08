@@ -1,0 +1,40 @@
+[user]
+	name = Greg Houle
+	email = greg.houle@shopify.com
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = Kaleidoscope
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[mergetool]
+	prompt = false
+	keepBackup = false
+[diff]
+	tool = Kaleidoscope
+[push]
+	default = upstream
+[github]
+	user = sorryeh
+[alias]
+  d = diff
+  dc = diff --cached
+  s = status
+  c = commit
+  ca = commit --amend
+  cl = clone
+  ch = checkout
+  a = add
+  w = whatchanged
+  b = branch
+  f = fetch
+  unstage = reset HEAD --
+  last = log -1 HEAD
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+[help]
+  autocorrect = 1
