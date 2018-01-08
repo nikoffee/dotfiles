@@ -269,6 +269,10 @@ let g:idris_indent_rewrite = 8
 
 " ====== Rust ========
 let g:rustfmt_autosave = 1
+let g:deoplete#sources#rust#racer_binary='$HOME/.cargo/bin/racer'
+let g:deoplete#sources#rust#rust_source_path='$HOME/src/github.com/rust/src'
+let g:deoplete#sources#rust#show_duplicates=1
+let g:deoplete#sources#rust#documentation_max_height=20
 
 " ===== Grepper ======
 let g:grepper               = {}
