@@ -19,7 +19,7 @@ if dein#load_state(s:bundle_dir)
 
     call dein#add('neomake/neomake')
     call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
-    
+
     call dein#add('scrooloose/nerdtree')
     call dein#add('scrooloose/nerdcommenter')
 
@@ -29,40 +29,40 @@ if dein#load_state(s:bundle_dir)
     call dein#add('vim-airline/vim-airline-themes')
 
     call dein#add('ctrlpvim/ctrlp.vim')
-    
+
     call dein#add('Shougo/denite.nvim')
     call dein#add('Shougo/deoplete.nvim')
     call dein#add('ervandew/supertab')
-    
+
     call dein#add('SirVer/ultisnips')
     call dein#add('honza/vim-snippets')
 
     call dein#add('airblade/vim-gitgutter')
-    
+
     call dein#add('majutsushi/tagbar')
 
     call dein#add('carlitux/deoplete-ternjs')
     call dein#add('ternjs/tern_for_vim')
     call dein#add('ramitos/jsctags')
-    
+
     call dein#add('critiqjo/lldb.nvim')
-    
+
     call dein#add('hkupty/iron.nvim')
-    
+
     call dein#add('neovimhaskell/haskell-vim')
     call dein#add('eagletmt/ghcmod-vim')
     call dein#add('MarcWeber/hasktags')
     call dein#add('eagletmt/neco-ghc')
 
     call dein#add('idris-hackers/idris-vim')
-    
+
     call dein#add('brooth/far.vim')
-    
+
     call dein#add('mhinz/vim-grepper')
-    
+
     call dein#add('janko-m/vim-test')
     call dein#add('tpope/vim-dispatch')
-    
+
     call dein#add('mhinz/vim-rfc')
 
     call dein#add('bling/vim-bufferline')
@@ -70,6 +70,7 @@ if dein#load_state(s:bundle_dir)
     call dein#add('rizzatti/dash.vim')
 
     call dein#add('rust-lang/rust.vim')
+    call dein#add('sebastianmarkow/deoplete-rust')
 
     call dein#end()
     call dein#save_state()
