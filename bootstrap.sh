@@ -17,14 +17,14 @@ cd $dir
 
 for file in $files; do
   mv ~/$file $old_dir/ 2>/dev/null
-  ln -s $dir/$file ~/$file
+  ln -sfn $dir/$file ~/$file
 done
 
 for file in $nvim_files; do
   mv $nvim_dir/$file $old_dir/ 2>/dev/null
-  ln -s $dir/$file $nvim_dir/$file
+  ln -sfn $dir/$file $nvim_dir/$file
 done
 
-ln -s $dir/snippets/* $nvim_snippets/
+ln -sfn $dir/snippets/* $nvim_snippets/
 
 source ~/.zshrc
