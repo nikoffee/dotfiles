@@ -26,5 +26,3 @@ for file in $nvim_files; do
 done
 
 ln -sfn $dir/snippets/* $nvim_snippets/
-
-source ~/.zshrc

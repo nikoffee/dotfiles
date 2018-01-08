@@ -59,9 +59,9 @@ brewit() {
     pip3 list --outdated | cut -d' ' -f1 | xargs pip3 install --upgrade
   fi
 
-  if [ hash pip 2>/dev/null ]
+  if [ hash pip2 2>/dev/null ]
   then
-    pip list --outdated | cut -d' ' -f1 | xargs pip install --upgrade
+    pip2 list --outdated | cut -d' ' -f1 | xargs pip2 install --upgrade
   fi
   echo -e "\e[92mSuccess!\e[0m"
 }
@@ -104,3 +104,4 @@ eval "$(stack --bash-completion-script stack)"
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
