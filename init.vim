@@ -8,7 +8,7 @@ endif
 
 set runtimepath+=$VIMRUNTIME
 set runtimepath+=$VIM
-set runtimepath+=~/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 let s:bundle_dir = expand('$HOME/.config/nvim/bundle')
 let s:plugin_dir = s:bundle_dir . '/repos/github.com'
 
@@ -16,6 +16,7 @@ if dein#load_state(s:bundle_dir)
     call dein#begin(s:bundle_dir)
 
     call dein#add(s:plugin_dir . '/Shougo/dein.vim')
+    call dein#add('Shougo/deoplete.nvim')
 
     call dein#add('neomake/neomake')
     call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
@@ -31,7 +32,6 @@ if dein#load_state(s:bundle_dir)
     call dein#add('ctrlpvim/ctrlp.vim')
 
     call dein#add('Shougo/denite.nvim')
-    call dein#add('Shougo/deoplete.nvim')
     call dein#add('ervandew/supertab')
 
     call dein#add('SirVer/ultisnips')
@@ -300,7 +300,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " NerdTREE toggle
-map <Leader>n :NERDTreeToggle<CR>
+map <leader>n :NERDTreeToggle<CR>
 
 " ================ GHC MOD ====================
 map <silent> tw :GhcModTypeInsert<CR>
@@ -313,4 +313,8 @@ map <silent> te :GhcModTypeClear<CR>
 
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" ======== Python =========
+let g:python3_host_prog = "/usr/local/bin/python3"
+let g:python_host_prog = "/usr/bin/python"
 

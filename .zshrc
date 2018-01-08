@@ -21,10 +21,6 @@ export GREP_OPTIONS='--color=auto'
 export PATH=$HOME/.custom-git:$PATH
 export EDITOR="nvim"
 
-if [ -f "$HOME/.bash_functions" ]; then
-  source "$HOME/.bash_functions"
-fi
-
 if [ -f "$HOME/.bashrc" ]; then
   source "$HOME/.bashrc"
 fi
@@ -104,5 +100,4 @@ eval "$(stack --bash-completion-script stack)"
 
 export PATH="/usr/local/opt/gettext/bin:$PATH"
 export PATH="/usr/local/opt/libxml2/bin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
