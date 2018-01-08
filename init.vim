@@ -1,91 +1,80 @@
 set termguicolors
 
 if has('nvim')
-    let s:editor_root=expand("$HOME/.config/nvim")
+	let s:editor_root = expand("$HOME/.config/nvim")
 else
-    let s:editor_root=expand("$HOME/.vim")
+	let s:editor_root = expand("$HOME/.vim")
 endif
 
 set runtimepath+=$VIMRUNTIME
 set runtimepath+=$VIM
 set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
-let s:bundle_dir = expand('$HOME/.config/nvim/bundle')
-let s:plugin_dir = s:bundle_dir . '/repos/github.com'
+let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
+let s:plugin_dir=s:bundle_dir . '/repos/github.com'
+
+" ======== Python =========
+let g:python3_host_prog = "/usr/local/opt/python3"
+let g:python_host_prog = '/usr/local/opt/python'
 
 if dein#load_state(s:bundle_dir)
-    call dein#begin(s:bundle_dir)
+	call dein#begin(s:bundle_dir)
 
-    call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-    call dein#add('Shougo/deoplete.nvim')
+	call dein#add(s:plugin_dir . '/Shougo/dein.vim')
+	call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+  call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
+  call dein#add('Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' })
+  call dein#add('Shougo/echodoc.vim')
 
-    call dein#add('neomake/neomake')
-    call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+	call dein#add('neomake/neomake')
 
-    call dein#add('scrooloose/nerdtree')
-    call dein#add('scrooloose/nerdcommenter')
+	call dein#add('jacoborus/tender.vim')
+	call dein#add('scrooloose/nerdtree')
+	call dein#add('scrooloose/nerdcommenter')
+	call dein#add('vim-airline/vim-airline')
+	call dein#add('vim-airline/vim-airline-themes')
+	call dein#add('ctrlpvim/ctrlp.vim')
+	call dein#add('ervandew/supertab')
+	call dein#add('SirVer/ultisnips')
+	call dein#add('honza/vim-snippets')
+	call dein#add('airblade/vim-gitgutter')
+	call dein#add('majutsushi/tagbar')
+	call dein#add('carlitux/deoplete-ternjs')
+	call dein#add('ternjs/tern_for_vim')
+  call dein#add('ramitos/jsctags')
 
-    call dein#add('jacoborus/tender.vim')
+  call dein#add('critiqjo/lldb.nvim')
+  call dein#add('hkupty/iron.nvim')
+  call dein#add('neovimhaskell/haskell-vim')
+  call dein#add('eagletmt/ghcmod-vim')
+  call dein#add('MarcWeber/hasktags')
+  call dein#add('eagletmt/neco-ghc')
+  call dein#add('idris-hackers/idris-vim')
+  call dein#add('brooth/far.vim')
+  call dein#add('mhinz/vim-grepper')
+  call dein#add('janko-m/vim-test')
+  call dein#add('tpope/vim-dispatch')
+  call dein#add('mhinz/vim-rfc')
+  call dein#add('bling/vim-bufferline')
+  call dein#add('rizzatti/dash.vim')
+  call dein#add('rust-lang/rust.vim')
+  call dein#add('sebastianmarkow/deoplete-rust')
+  call dein#add('roxma/nvim-completion-manager')
+  call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'master',
+    \ 'build': 'bash install.sh',
+    \ })
+	call dein#end()
+	call dein#save_state()
+endif
 
-    call dein#add('vim-airline/vim-airline')
-    call dein#add('vim-airline/vim-airline-themes')
-
-    call dein#add('ctrlpvim/ctrlp.vim')
-
-    call dein#add('Shougo/denite.nvim')
-    call dein#add('ervandew/supertab')
-
-    call dein#add('SirVer/ultisnips')
-    call dein#add('honza/vim-snippets')
-
-    call dein#add('airblade/vim-gitgutter')
-
-    call dein#add('majutsushi/tagbar')
-
-    call dein#add('carlitux/deoplete-ternjs')
-    call dein#add('ternjs/tern_for_vim')
-    call dein#add('ramitos/jsctags')
-
-    call dein#add('critiqjo/lldb.nvim')
-
-    call dein#add('hkupty/iron.nvim')
-
-    call dein#add('neovimhaskell/haskell-vim')
-    call dein#add('eagletmt/ghcmod-vim')
-    call dein#add('MarcWeber/hasktags')
-    call dein#add('eagletmt/neco-ghc')
-
-    call dein#add('idris-hackers/idris-vim')
-
-    call dein#add('brooth/far.vim')
-
-    call dein#add('mhinz/vim-grepper')
-
-    call dein#add('janko-m/vim-test')
-    call dein#add('tpope/vim-dispatch')
-
-    call dein#add('mhinz/vim-rfc')
-
-    call dein#add('bling/vim-bufferline')
-
-    call dein#add('rizzatti/dash.vim')
-
-    call dein#add('rust-lang/rust.vim')
-    call dein#add('sebastianmarkow/deoplete-rust')
-
-    call dein#end()
-    call dein#save_state()
+if dein#check_install()
+	call dein#install()
 endif
 
 filetype plugin indent on
 syntax enable
 
 colorscheme tender
-
-if dein#check_install()
-    call dein#install()
-endif
-
-" ==== General Configs ====
 
 set t_Co=256
 set title
@@ -119,12 +108,10 @@ set nowb
 
 set foldmethod=syntax
 
-" Persistent Undo history
-silent !mkdir $HOME/.config/nvim/backups > /dev/null 2>&1
+silent !mkdir '~/.config/nvim/backups' > /dev/null 2>&1
 set undodir=$HOME/.config/nvim/backups
 set undofile
 
-" ==== Indentation ====
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
@@ -132,47 +119,33 @@ set expandtab
 set smartindent
 set nofoldenable
 
-" ================ Completion =======================
-
-set wildmode=list:full
-set wildignore=*.o,*.obj,*~ " ignore when tab completing
-set wildignore+=*vim/backups*
-set wildignore+=*cache*
-set wildignore+=*logs*
-set wildignore+=*node_modules/**
-set wildignore+=*DS_Store*
-set wildignore+=*.gem
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=*.png,*.jpg,*.gif
-
-" ================ Scrolling ========================
+set wildmenu
+set wildmode=list:longest,full
+set wildignore=*.o,*.obj,*~
+set wildignore+=*vim/backups*,*cache*,*logs*,*node_modules/**,*DS_Store*,*.gem,log/**,tmp/**,*.png,*.jpg,*.gif
 
 set scrolloff=8
 set sidescrolloff=15
 set sidescroll=5
 
-" ===== Shortcuts =====
 nnoremap Q @q
 let mapleader=";"
 
-" Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+yg_
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
 
-" Paste from clipboard
 nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
-" ========== Neomake ==========
-autocmd! BufWritePost * Neomake
+" ===== Neomake ======
+autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_open_list = 2
 
-" ========== Airline ==========
+" ====== Airline ======
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -186,12 +159,21 @@ let g:airline_right_alt_sep = '|'
 
 let g:airline_theme='badwolf'
 
-" =========== Deoplete ============
-let g:deoplete#enable_at_startup = 1
+" ===== Deoplete =====
+let g:deoplete#enable_at_startup=1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
+" ======== Language Client =========
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
+    \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
 " ==== Git Gutter ====
-let g:gitgutter_max_signs = 1000
+let g:gitgutter_max_signs = 10000
 
 " ===== Haskell =====
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -244,7 +226,7 @@ let g:tagbar_type_haskell = {
     \ }
 \ }
 
-" ======= Ruby ========
+" ===== Ruby ========
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
         \ 'm:modules',
@@ -313,8 +295,3 @@ map <silent> te :GhcModTypeClear<CR>
 
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" ======== Python =========
-let g:python3_host_prog = "/usr/local/bin/python3"
-let g:python_host_prog = "/usr/bin/python"
-

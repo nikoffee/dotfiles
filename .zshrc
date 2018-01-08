@@ -18,7 +18,7 @@ source /usr/local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.z
 ssh-add -A
 
 export GREP_OPTIONS='--color=auto'
-export PATH=$HOME/.custom-git:$PATH
+export PATH="$PATH:$HOME/.custom-git"
 export EDITOR="nvim"
 
 if [ -f "$HOME/.bashrc" ]; then
@@ -89,15 +89,16 @@ dns_google() {
 }
 
 if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+    PATH="$PATH:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
 fi
 
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:$HOME/.local/bin"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 eval "$(stack --bash-completion-script stack)"
 
-export PATH="/usr/local/opt/gettext/bin:$PATH"
-export PATH="/usr/local/opt/libxml2/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:/usr/local/opt/gettext/bin"
+export PATH="$PATH:/usr/local/opt/libxml2/bin"
+export PATH="$PATH:/usr/local/opt/python/libexec/bin"
+
