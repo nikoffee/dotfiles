@@ -6,14 +6,13 @@ export SHOPIFY_HOME=$HOME/src/github.com/Shopify
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
+export PYTHON_PATH="/usr/local/lib/python3.6/site-packages:/usr/local/lib/python2.7/site-packages:$PYTHON_PATH"
 
 plugins=(gem git brew colorize cp powerline sublime history sudo web-search pip zsh-syntax-highlighting forklift osx python rsync screen tmux vundle gnu-utils colored-man-pages mosh ruby rails)
 
 if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
   source /opt/dev/dev.sh
 fi
-
-source /usr/local/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
 
 ssh-add -A
 
@@ -89,7 +88,7 @@ dns_google() {
 }
 
 if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$PATH:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
+    PATH="$(ruby -rubygems -e 'puts Gem.user_dir')/bin:$PATH"
 fi
 
 export PATH="$HOME/.local/bin:$PATH"
