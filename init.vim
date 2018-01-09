@@ -36,14 +36,10 @@ if dein#load_state(s:bundle_dir)
 	call dein#add('ervandew/supertab')
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
+  call dein#add('jreybert/vimagit')
 	call dein#add('airblade/vim-gitgutter')
 	call dein#add('majutsushi/tagbar')
-	call dein#add('carlitux/deoplete-ternjs')
-	call dein#add('ternjs/tern_for_vim')
-  call dein#add('ramitos/jsctags')
-
   call dein#add('critiqjo/lldb.nvim')
-  call dein#add('hkupty/iron.nvim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
   call dein#add('MarcWeber/hasktags')
@@ -53,7 +49,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('mhinz/vim-grepper')
   call dein#add('janko-m/vim-test')
   call dein#add('tpope/vim-dispatch')
-  call dein#add('mhinz/vim-rfc')
   call dein#add('bling/vim-bufferline')
   call dein#add('rizzatti/dash.vim')
   call dein#add('rust-lang/rust.vim')
@@ -63,6 +58,7 @@ if dein#load_state(s:bundle_dir)
     \ 'rev': 'master',
     \ 'build': 'bash install.sh',
     \ })
+
 	call dein#end()
 	call dein#save_state()
 endif
@@ -119,8 +115,7 @@ set nofoldenable
 
 set wildmenu
 set wildmode=list:longest,full
-set wildignore=*.o,*.obj,*~
-set wildignore+=*vim/backups*,*cache*,*logs*,*node_modules/**,*DS_Store*,*.gem,log/**,tmp/**,*.png,*.jpg,*.gif
+set wildignore=*.o,*.obj,*~,*vim/backups*,*cache*,*logs*,*node_modules/**,*DS_Store*,*.gem,log/**,tmp/**,*.png,*.jpg,*.gif
 
 set scrolloff=8
 set sidescrolloff=15
@@ -147,6 +142,7 @@ let g:neomake_open_list = 2
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#right_sep = ' '
 let g:airline#extensions#tabline#right_alt_sep = '|'
@@ -157,9 +153,15 @@ let g:airline_right_alt_sep = '|'
 
 let g:airline_theme='tender'
 " let g:airline_theme='badwolf'
+" let g:airline_theme='dark theme with powerline symbols'
+
+colorscheme tender
+" colorscheme desert " dark bg, light pastel text
+" colorscheme elflord " black bg, neon darker text
+" colorscheme evening " dark bg, light neon text
 
 " ===== Deoplete =====
-let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ======== Language Client =========
