@@ -6,15 +6,15 @@ else
 	let s:editor_root = expand("$HOME/.vim")
 endif
 
+set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 set runtimepath+=$VIMRUNTIME
 set runtimepath+=$VIM
-set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
 let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
 let s:plugin_dir=s:bundle_dir . '/repos/github.com'
 
 " ======== Python =========
-let g:python3_host_prog = "/usr/local/opt/python3"
-let g:python_host_prog = '/usr/local/opt/python'
+let g:python3_host_prog='/usr/local/opt/python3'
+let g:python_host_prog='/usr/local/opt/python/libexec/bin/python'
 
 if dein#load_state(s:bundle_dir)
 	call dein#begin(s:bundle_dir)
@@ -22,7 +22,7 @@ if dein#load_state(s:bundle_dir)
 	call dein#add(s:plugin_dir . '/Shougo/dein.vim')
 	call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
-  call dein#add('Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' })
+  call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
 
 	call dein#add('neomake/neomake')
@@ -73,8 +73,6 @@ endif
 
 filetype plugin indent on
 syntax enable
-
-colorscheme tender
 
 set t_Co=256
 set title
@@ -157,7 +155,8 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
 
-let g:airline_theme='badwolf'
+let g:airline_theme='tender'
+" let g:airline_theme='badwolf'
 
 " ===== Deoplete =====
 let g:deoplete#enable_at_startup=1
@@ -251,8 +250,8 @@ let g:idris_indent_rewrite = 8
 
 " ====== Rust ========
 let g:rustfmt_autosave = 1
-let g:deoplete#sources#rust#racer_binary='$HOME/.cargo/bin/racer'
-let g:deoplete#sources#rust#rust_source_path='$HOME/src/github.com/rust/src'
+let g:deoplete#sources#rust#racer_binary=expand('$HOME/.cargo/bin/racer')
+let g:deoplete#sources#rust#rust_source_path=expand('$HOME/src/github.com/rust/src')
 let g:deoplete#sources#rust#show_duplicates=1
 let g:deoplete#sources#rust#documentation_max_height=20
 

@@ -92,7 +92,7 @@ if which ruby >/dev/null && which gem >/dev/null; then
     PATH="$PATH:$(ruby -rubygems -e 'puts Gem.user_dir')/bin"
 fi
 
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 
 autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
@@ -100,5 +100,5 @@ eval "$(stack --bash-completion-script stack)"
 
 export PATH="$PATH:/usr/local/opt/gettext/bin"
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
-export PATH="$PATH:/usr/local/opt/python/libexec/bin"
-
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
