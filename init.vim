@@ -17,7 +17,8 @@ let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
 let s:plugin_dir=s:bundle_dir . '/repos/github.com'
 
 " ======== Python =========
-" let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2.7'
 let g:loaded_python_provider = 1
 
 if dein#load_state(s:plugin_dir)
@@ -95,6 +96,7 @@ set hlsearch
 set laststatus=2
 set modeline
 set magic
+set splitright
 
 set noswapfile
 set nobackup
@@ -285,5 +287,9 @@ map <silent> te :GhcModTypeClear<CR>
 " ======= Dash App bindings =========
 :nmap <silent> <leader>d <Plug>DashSearch
 
+" ===== Far.vim =====
+let g:far#source = 'ag'
+
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
