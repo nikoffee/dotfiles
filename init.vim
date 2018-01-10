@@ -54,10 +54,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('rust-lang/rust.vim')
   call dein#add('sebastianmarkow/deoplete-rust')
   call dein#add('roxma/nvim-completion-manager')
-  call dein#add('autozimu/LanguageClient-neovim', {
-    \ 'rev': 'master',
-    \ 'build': 'bash install.sh',
-    \ })
 
 	call dein#end()
 	call dein#save_state()
@@ -163,15 +159,6 @@ colorscheme tender
 " ===== Deoplete =====
 let g:deoplete#enable_at_startup = 1
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-
-" ======== Language Client =========
-let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls']
-    \ }
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
