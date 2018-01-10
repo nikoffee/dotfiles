@@ -169,7 +169,11 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
 
-" ===== Haskell =====
+" ===== TagBar =====
+
+nmap <F8> :TagbarToggle<CR>
+
+    " == Haskell ==
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
 let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
@@ -220,7 +224,7 @@ let g:tagbar_type_haskell = {
     \ }
 \ }
 
-" ===== Ruby ========
+    " == Ruby ==
 let g:tagbar_type_ruby = {
     \ 'kinds' : [
         \ 'm:modules',
@@ -232,6 +236,39 @@ let g:tagbar_type_ruby = {
     \ ]
 \ }
 
+if executable('ripper-tags')
+  let g:tagbar_type_ruby = {
+      \ 'kinds'      : ['m:modules',
+                      \ 'c:classes',
+                      \ 'C:constants',
+                      \ 'F:singleton methods',
+                      \ 'f:methods',
+                      \ 'a:aliases'],
+      \ 'kind2scope' : { 'c' : 'class',
+                       \ 'm' : 'class' },
+      \ 'scope2kind' : { 'class' : 'c' },
+      \ 'ctagsbin'   : 'ripper-tags',
+      \ 'ctagsargs'  : ['-f', '-']
+      \ }
+endif
+
+  " == Rust ==
+let g:tagbar_type_rust = {
+	\ 'ctagstype' : 'rust',
+	\ 'kinds' : [
+		\'T:types,type definitions',
+		\'f:functions,function definitions',
+		\'g:enum,enumeration names',
+		\'s:structure names',
+		\'m:modules,module names',
+		\'c:consts,static constants',
+		\'t:traits',
+		\'i:impls,trait implementations',
+	\]
+\}
+
+
+" ===== UltiSnips =====
 let g:UltiSnipsExpandTrigger="<tab>"
 let ruby_fold = 1
 
