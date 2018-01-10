@@ -1,5 +1,9 @@
 set termguicolors
 
+if &compatible
+  set nocompatible
+endif
+
 if has('nvim')
 	let s:editor_root = expand("$HOME/.config/nvim")
 else
@@ -13,14 +17,14 @@ let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
 let s:plugin_dir=s:bundle_dir . '/repos/github.com'
 
 " ======== Python =========
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 let g:loaded_python_provider = 1
 
-if dein#load_state(s:bundle_dir)
-	call dein#begin(s:bundle_dir)
+if dein#load_state(s:plugin_dir)
+	call dein#begin(s:plugin_dir)
 
 	call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-	call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
+	call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
