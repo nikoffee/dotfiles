@@ -30,18 +30,18 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
 
-	call dein#add('neomake/neomake')
+	call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
-	call dein#add('jacoborus/tender.vim')
-	call dein#add('scrooloose/nerdtree')
+	call dein#add('jacoborus/tender.vim') " theme & color scheme
+	call dein#add('scrooloose/nerdtree') " vim directory navigation
 	call dein#add('scrooloose/nerdcommenter')
-	call dein#add('vim-airline/vim-airline')
-	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('ctrlpvim/ctrlp.vim')
+	call dein#add('vim-airline/vim-airline') " airline plugin for UX
+	call dein#add('vim-airline/vim-airline-themes') " themes from airline
+	call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder
 	call dein#add('ervandew/supertab')
 	call dein#add('SirVer/ultisnips')
 	call dein#add('honza/vim-snippets')
-  call dein#add('jreybert/vimagit')
+  call dein#add('jreybert/vimagit') " git operations inside vim (emacs magit)
 	call dein#add('airblade/vim-gitgutter')
 	call dein#add('majutsushi/tagbar')
   call dein#add('critiqjo/lldb.nvim')
@@ -49,15 +49,18 @@ if dein#load_state(s:plugin_dir)
   call dein#add('eagletmt/ghcmod-vim')
   call dein#add('MarcWeber/hasktags')
   call dein#add('eagletmt/neco-ghc')
-  call dein#add('idris-hackers/idris-vim')
-  call dein#add('brooth/far.vim')
+  call dein#add('idris-hackers/idris-vim') " idris integration
+  call dein#add('brooth/far.vim') " search replace utility
   call dein#add('mhinz/vim-grepper')
+
   call dein#add('janko-m/vim-test')
+  call dein#add('skywind3000/asyncrun.vim') " run your tests inside nvim
+
   call dein#add('tpope/vim-dispatch')
   call dein#add('bling/vim-bufferline')
-  call dein#add('rizzatti/dash.vim')
-  call dein#add('rust-lang/rust.vim')
-  call dein#add('sebastianmarkow/deoplete-rust')
+  call dein#add('rizzatti/dash.vim') " dash integration
+  call dein#add('rust-lang/rust.vim') " rust integration
+  call dein#add('sebastianmarkow/deoplete-rust') " rust completion
   call dein#add('roxma/nvim-completion-manager')
 
 	call dein#end()
@@ -137,8 +140,9 @@ vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
 " ===== Neomake ======
-autocmd! BufWritePost,BufEnter * Neomake
+" autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_open_list = 2
+call neomake#configure#automake('rw', 1000)
 
 " ====== Airline ======
 let g:airline#extensions#tabline#enabled = 1
@@ -295,10 +299,13 @@ let g:grepper.next_tool     = '<leader>g'
 let g:grepper.simple_prompt = 1
 let g:grepper.quickfix      = 0
 
-" ====== Vim Test ======
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-let test#strategy = "neomake"
+" ====== Async Run test ======
+let g:asyncrun_mode = 0
+let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
+let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
+let test#strategy = "asyncrun"
+nmap <silent><leader>t :TestNearest<CR>
+nmap <silent><leader>T :TestFile<CR>
 
 " ======= nerdTREE ======
 " Enter nerdtree on no file
