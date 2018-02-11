@@ -80,11 +80,11 @@ burp_proxy_off() {
 }
 
 dns_clear() {
-  networksetup -setdnsservers Wi-Fi
+  networksetup -setdnsservers 'Wi-Fi'
 }
 
 dns_google() {
-  networksetup -setdnsservers Wi-Fi 8.8.8.8 8.8.4.4
+  networksetup -setdnsservers 'Wi-Fi' 8.8.8.8 8.8.4.4
 }
 
 if which ruby >/dev/null && which gem >/dev/null; then
@@ -99,6 +99,7 @@ eval "$(stack --bash-completion-script stack)"
 
 export PATH="$PATH:/usr/local/opt/gettext/bin"
 export PATH="$PATH:/usr/local/opt/libxml2/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
