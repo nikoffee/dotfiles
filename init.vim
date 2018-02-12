@@ -11,8 +11,6 @@ else
 endif
 
 set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
-set runtimepath+=$VIMRUNTIME
-set runtimepath+=$VIM
 let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
 let s:plugin_dir=s:bundle_dir . '/repos/github.com'
 
@@ -332,7 +330,7 @@ map <silent> te :GhcModTypeClear<CR>
 :nmap <silent> <leader>d <Plug>DashSearch
 
 " ===== Far.vim =====
-let g:far#source = 'ag'
+let g:far#source = 'agnvim'
 
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']

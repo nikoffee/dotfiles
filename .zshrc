@@ -28,10 +28,6 @@ if [ -f "$HOME/.profile" ]; then
   source "$HOME/.profile"
 fi
 
-if type nvim > /dev/null 2>&1; then
-  alias vim='nvim'
-fi
-
 # ------ Functions -------
 brewit() {
   echo -e "\e[93mNow Updating brew..\e[0m"
@@ -59,6 +55,11 @@ brewit() {
     pip2 list --outdated | cut -d' ' -f1 | xargs pip2 install --upgrade
   fi
   echo -e "\e[92mSuccess!\e[0m"
+}
+
+git_clean_merged_branches() {
+  echo -e "\e[93mNow cleaning all local git branches that have been merged into master on the remote.. \e[0m"
+  git branch --merged master --no-color | grep -v '^* master$' | xargs -n1 git branch -d
 }
 
 # Aliases
