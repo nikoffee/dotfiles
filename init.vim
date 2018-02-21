@@ -332,6 +332,9 @@ map <silent> te :GhcModTypeClear<CR>
 " ===== Far.vim =====
 let g:far#source = 'agnvim'
 
+" ===== Ag for Vim =====
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
