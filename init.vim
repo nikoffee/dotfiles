@@ -109,13 +109,6 @@ silent !mkdir '~/.config/nvim/backups' > /dev/null 2>&1
 set undodir=$HOME/.config/nvim/backups
 set undofile
 
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
-set expandtab
-set smartindent
-set nofoldenable
-
 set wildmenu
 set wildmode=list:longest,full
 set wildignore=*.o,*.obj,*~,*vim/backups*,*cache*,*logs*,*node_modules/**,*DS_Store*,*.gem,log/**,tmp/**,*.png,*.jpg,*.gif
@@ -166,13 +159,11 @@ colorscheme tender
 
 " ===== Deoplete =====
 let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
 
 " ===== TagBar =====
-
 nmap <F8> :TagbarToggle<CR>
 
     " == Haskell ==
@@ -238,22 +229,6 @@ let g:tagbar_type_ruby = {
     \ ]
 \ }
 
-" if executable('ripper-tags')
-"   let g:tagbar_type_ruby = {
-"       \ 'kinds'      : ['m:modules',
-"                       \ 'c:classes',
-"                       \ 'C:constants',
-"                       \ 'F:singleton methods',
-"                       \ 'f:methods',
-"                       \ 'a:aliases'],
-"       \ 'kind2scope' : { 'c' : 'class',
-"                        \ 'm' : 'class' },
-"       \ 'scope2kind' : { 'class' : 'c' },
-"       \ 'ctagsbin'   : 'ripper-tags',
-"       \ 'ctagsargs'  : ['-f', '-']
-"       \ }
-" endif
-
   " == Rust ==
 let g:tagbar_type_rust = {
 	\ 'ctagstype' : 'rust',
@@ -271,16 +246,11 @@ let g:tagbar_type_rust = {
 
 
 " ===== UltiSnips =====
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger="<S-tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 let ruby_fold = 1
-
-" ======= Idris ========
-let g:idris_indent_if = 3
-let g:idris_indent_case = 5
-let g:idris_indent_let = 4
-let g:idris_indent_where = 6
-let g:idris_indent_do = 3
-let g:idris_indent_rewrite = 8
 
 " ====== Rust ========
 let g:rustfmt_autosave = 1
@@ -300,7 +270,7 @@ let g:grepper.quickfix      = 0
 " ====== Async Run test ======
 let g:asyncrun_mode = 0
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
-let g:asyncrun_rootmarks = ['.svn', '.git', '.root', '.bzr', '_darcs', 'build.xml']
+let g:asyncrun_rootmarks = ['.git', '.root', '.bzr', '_darcs', 'build.xml']
 let test#strategy = "asyncrun"
 nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
@@ -310,21 +280,8 @@ nmap <silent><leader>T :TestFile<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Enter nerdtree on directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-" Close vim if only NerdTREE open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
 " NerdTREE toggle
 map <leader>n :NERDTreeToggle<CR>
-
-" ================ GHC MOD ====================
-map <silent> tw :GhcModTypeInsert<CR>
-map <silent> ts :GhcModSplitFunCase<CR>
-map <silent> tq :GhcModType<CR>
-map <silent> te :GhcModTypeClear<CR>
 
 " ======= Dash App bindings =========
 :nmap <silent> <leader>d <Plug>DashSearch
@@ -338,3 +295,12 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
+
+" Indent Custom Config
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
+set expandtab
+set smartindent
+set nofoldenable
+
