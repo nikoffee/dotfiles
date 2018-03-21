@@ -130,10 +130,17 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+map <Leader>[ :bprevious<CR>
+map <Leader>] :bnext<CR>
+
 " ===== Neomake ======
 " autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_open_list = 2
 call neomake#configure#automake('rw', 1000)
+
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\ : pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " ====== Airline ======
 let g:airline#extensions#tabline#enabled = 1
@@ -159,6 +166,10 @@ colorscheme tender
 
 " ===== Deoplete =====
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#tag#cache_limit_size = 20000000
+let g:deoplete#max_list = 30
+let g:deoplete#enable_camel_case = 1
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
@@ -280,6 +291,7 @@ nmap <silent><leader>T :TestFile<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+let g:NERDTreeShowHidden = 1
 " NerdTREE toggle
 map <leader>n :NERDTreeToggle<CR>
 
@@ -301,6 +313,4 @@ set shiftwidth=2
 set softtabstop=2
 set tabstop=2
 set expandtab
-set smartindent
 set nofoldenable
-
