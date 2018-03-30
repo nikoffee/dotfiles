@@ -284,7 +284,7 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 " ======== CtrlP options =======
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30,results:0'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
 
 " Indent Custom Config
 set shiftwidth=2
