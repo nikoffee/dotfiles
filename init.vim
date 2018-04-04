@@ -55,6 +55,8 @@ if dein#load_state(s:plugin_dir)
   call dein#add('skywind3000/asyncrun.vim') " run your tests inside nvim
 
   call dein#add('tpope/vim-dispatch')
+  call dein#add('tpope/vim-rails')
+  call dein#add('tpope/vim-bundler')
   call dein#add('bling/vim-bufferline')
   call dein#add('rizzatti/dash.vim') " dash integration
   call dein#add('rust-lang/rust.vim') " rust integration
@@ -285,6 +287,9 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
+
+" ==== DestroyAllSoftware
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Indent Custom Config
 set shiftwidth=2
