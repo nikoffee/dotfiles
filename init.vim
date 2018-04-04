@@ -79,13 +79,13 @@ set title
 set background=dark
 set number
 set relativenumber
-set history=2500
+set history=10000
 set showcmd
 set noshowmode
 set gdefault
 set cursorline
 set smartcase
-set ignorecase
+set ignorecase smartcase
 set mouse=a
 set showmatch
 set nostartofline
@@ -100,6 +100,12 @@ set laststatus=2
 set modeline
 set magic
 set splitright
+set autoindent
+set winwidth=79
+set t_ti= t_te=
+set backspace=indent,eol,start
+set nojoinspaces
+set autoread
 
 set noswapfile
 set nobackup
@@ -112,12 +118,16 @@ set undodir=$HOME/.config/nvim/backups
 set undofile
 
 set wildmenu
-set wildmode=list:longest,full
+set wildmode=longest,list
 set wildignore=*.o,*.obj,*~,*vim/backups*,*cache*,*logs*,*node_modules/**,*DS_Store*,*.gem,log/**,tmp/**,*.png,*.jpg,*.gif
 
-set scrolloff=8
+set scrolloff=5
 set sidescrolloff=15
 set sidescroll=5
+
+autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
+autocmd FileType python set sw=4 sts=4 et
+autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
 
 nnoremap Q @q
 let mapleader=";"
@@ -288,8 +298,76 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:30'
 
-" ==== DestroyAllSoftware
+"""" ==== DestroyAllSoftware
+" type current dir path
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
+
+" Manage win size
+set winwidth=84
+set winheight=5
+set winminheight=5
+set winheight=999
+
+" Show Rails Routes
+function! ShowRoutes()
+  " Requires 'scratch' plugin
+  :topleft 100 :split __Routes__
+  " Make sure Vim doesn't write __Routes__ as a file
+  :set buftype=nofile
+  " Delete everything
+  :normal 1GdG
+  " Put routes output in buffer
+  :0r! rake -s routes
+  " Size window to number of lines (1 plus rake output length)
+  :exec ":normal " . line("$") . "_ "
+  " Move cursor to bottom
+  :normal 1GG
+  " Delete empty trailing line
+  :normal dd
+endfunction
+map <leader>gR :call ShowRoutes()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MISC KEY MAPS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+" quick switch between last 2 files
+nnoremap <leader><leader> <c-^>
+" Align selected lines
+vnoremap <leader>ib :!align<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OpenChangedFiles COMMAND
+" Open a split for each dirty file in git
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "sp " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
 
 " Indent Custom Config
 set shiftwidth=2
