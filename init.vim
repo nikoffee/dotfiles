@@ -277,6 +277,11 @@ let g:asyncrun_open = 8
 nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
 
+" ===== QuickFix window =====
+augroup initvim
+    autocmd QuickFixCmdPost * botright copen 8
+augroup END
+
 " ======= nerdTREE ======
 " Enter nerdtree on no file
 autocmd StdinReadPre * let s:std_in=1
