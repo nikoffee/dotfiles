@@ -273,6 +273,7 @@ let g:asyncrun_mode = 0
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:asyncrun_rootmarks = ['.git', '.root', '.bzr', '_darcs', 'build.xml']
 let test#strategy = "asyncrun"
+let g:asyncrun_open = 8
 nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
 
