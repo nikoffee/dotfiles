@@ -20,28 +20,28 @@ let g:python_host_prog = '/usr/local/bin/python2.7'
 let g:loaded_python_provider = 1
 
 if dein#load_state(s:plugin_dir)
-	call dein#begin(s:plugin_dir)
+  call dein#begin(s:plugin_dir)
 
-	call dein#add(s:plugin_dir . '/Shougo/dein.vim')
-	call dein#add('Shougo/deoplete.nvim')
+  call dein#add(s:plugin_dir . '/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
 
-	call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
+  call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
-	call dein#add('jacoborus/tender.vim') " theme & color scheme
-	call dein#add('scrooloose/nerdtree') " vim directory navigation
-	call dein#add('scrooloose/nerdcommenter')
-	call dein#add('vim-airline/vim-airline') " airline plugin for UX
-	call dein#add('vim-airline/vim-airline-themes') " themes from airline
-	call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder
-	call dein#add('ervandew/supertab')
-	call dein#add('SirVer/ultisnips')
-	call dein#add('honza/vim-snippets')
+  call dein#add('jacoborus/tender.vim') " theme & color scheme
+  call dein#add('scrooloose/nerdtree') " vim directory navigation
+  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('vim-airline/vim-airline') " airline plugin for UX
+  call dein#add('vim-airline/vim-airline-themes') " themes from airline
+  call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder
+  call dein#add('ervandew/supertab')
+  call dein#add('SirVer/ultisnips')
+  call dein#add('honza/vim-snippets')
   call dein#add('jreybert/vimagit') " git operations inside vim (emacs magit)
-	call dein#add('airblade/vim-gitgutter')
-	call dein#add('majutsushi/tagbar')
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('majutsushi/tagbar')
   call dein#add('critiqjo/lldb.nvim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
@@ -261,26 +261,26 @@ let g:deoplete#sources#rust#show_duplicates=1
 let g:deoplete#sources#rust#documentation_max_height=20
 
 " ===== Grepper ======
+nnoremap <leader>g :Grepper -tool rg<cr>
+nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+
 let g:grepper               = {}
 let g:grepper.tools         = ['rg', 'git', 'ag']
 let g:grepper.jump          = 1
 let g:grepper.next_tool     = '<leader>g'
 let g:grepper.simple_prompt = 1
-let g:grepper.quickfix      = 0
+let g:grepper.quickfix      = 1
 
 " ====== Async Run test ======
 let g:asyncrun_mode = 0
 let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:asyncrun_rootmarks = ['.git', '.root', '.bzr', '_darcs', 'build.xml']
 let test#strategy = "asyncrun"
-let g:asyncrun_open = 8
+let g:asyncrun_open = 12
 nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
-
-" ===== QuickFix window =====
-augroup initvim
-    autocmd QuickFixCmdPost * botright copen 8
-augroup END
 
 " ======= nerdTREE ======
 " Enter nerdtree on no file
@@ -381,3 +381,9 @@ set softtabstop=2
 set tabstop=2
 set expandtab
 set nofoldenable
+
+autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+            \   q :cclose<cr>:lclose<cr>
+autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+            \   bd|
+            \   q | endif
