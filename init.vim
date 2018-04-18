@@ -101,7 +101,6 @@ set modeline
 set magic
 set splitright
 set autoindent
-set winwidth=79
 set t_ti= t_te=
 set backspace=indent,eol,start
 set nojoinspaces
@@ -307,9 +306,9 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Manage win size
 set winwidth=84
-set winheight=20
-set winminheight=20
-set winheight=999
+set winheight=5
+set winminheight=5
+set winheight=30
 
 " Show Rails Routes
 function! ShowRoutes()
