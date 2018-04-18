@@ -283,9 +283,6 @@ nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
 
 " ======= nerdTREE ======
-" Enter nerdtree on no file
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 let g:NERDTreeShowHidden = 1
 " NerdTREE toggle
 map <leader>n :NERDTreeToggle<CR>
@@ -310,8 +307,8 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 
 " Manage win size
 set winwidth=84
-set winheight=5
-set winminheight=5
+set winheight=20
+set winminheight=20
 set winheight=999
 
 " Show Rails Routes
@@ -344,7 +341,7 @@ nnoremap <c-l> <c-w>l
 " quick switch between last 2 files
 nnoremap <leader><leader> <c-^>
 " Align selected lines
-vnoremap <leader>ib :!align<cr>
+vnoremap <leader>ll :!align<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RENAME CURRENT FILE
