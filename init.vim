@@ -32,7 +32,7 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
-  call dein#add('w0rp/ale') " Async Lint Engine
+  "call dein#add('w0rp/ale') " Async Lint Engine
 
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
@@ -41,6 +41,9 @@ if dein#load_state(s:plugin_dir)
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
   call dein#add('airblade/vim-gitgutter')
   call dein#add('majutsushi/tagbar') " project structure via tags
+
+  call dein#add('tpope/vim-fugitive') " needed for airline branch
+
   call dein#add('critiqjo/lldb.nvim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
@@ -157,28 +160,13 @@ call neomake#configure#automake('nw', 500)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = '☰'
-let g:airline_symbols.maxlinenr = ''
-
-
 let g:airline_powerline_fonts=1
+
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 let g:airline#extensions#quickfix#location_text = 'Location'
 
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline#extensions#whitespace#mixed_indent_algo = 0
-let g:airline#extensions#whitespace#symbol = '!'
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
 
 let g:airline#extensions#whitespace#show_message = 1
@@ -203,17 +191,8 @@ let g:deoplete#auto_complete_delay = 75
 let g:deoplete#auto_refresh_delay = 350
 
 let g:deoplete#sources = {}
-
-" use tab
-imap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ deoplete#mappings#manual_complete()
-function! s:check_back_space() abort "{{{
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
@@ -268,11 +247,7 @@ let g:tagbar_type_rust = {
 \}
 
 
-" ===== UltiSnips =====
-let g:UltiSnipsExpandTrigger="<S-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+" ===== Ruby ======
 let ruby_fold = 1
 
 " ====== Rust ========
@@ -303,11 +278,6 @@ let test#strategy = "asyncrun"
 let g:asyncrun_open = 12
 nmap <silent><leader>t :TestNearest<CR>
 nmap <silent><leader>T :TestFile<CR>
-
-" ======= nerdTREE ======
-let g:NERDTreeShowHidden = 1
-" NerdTREE toggle
-map <leader>n :NERDTreeToggle<CR>
 
 " ======= Dash App bindings =========
 :nmap <silent> <leader>d <Plug>DashSearch
@@ -401,8 +371,8 @@ set tabstop=2
 set expandtab
 set nofoldenable
 
-autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
-            \   q :cclose<cr>:lclose<cr>
-autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
-            \   bd|
-            \   q | endif
+"autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
+            "\   q :cclose<cr>:lclose<cr>
+"autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
+            "\   bd|
+            "\   q | endif
