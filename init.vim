@@ -5,9 +5,9 @@ if &compatible
 endif
 
 if has('nvim')
-	let s:editor_root = expand("$HOME/.config/nvim")
+  let s:editor_root = expand("$HOME/.config/nvim")
 else
-	let s:editor_root = expand("$HOME/.vim")
+  let s:editor_root = expand("$HOME/.vim")
 endif
 
 set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
@@ -28,20 +28,19 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
 
+  call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
+
   call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
-  call dein#add('jacoborus/tender.vim') " theme & color scheme
+  call dein#add('w0rp/ale') " Async Lint Engine
+
   call dein#add('scrooloose/nerdtree') " vim directory navigation
-  call dein#add('scrooloose/nerdcommenter')
+  call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
   call dein#add('vim-airline/vim-airline-themes') " themes from airline
-  call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder
-  call dein#add('ervandew/supertab')
-  call dein#add('SirVer/ultisnips')
-  call dein#add('honza/vim-snippets')
-  call dein#add('jreybert/vimagit') " git operations inside vim (emacs magit)
+  call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('majutsushi/tagbar')
+  call dein#add('majutsushi/tagbar') " project structure via tags
   call dein#add('critiqjo/lldb.nvim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
@@ -63,18 +62,20 @@ if dein#load_state(s:plugin_dir)
   call dein#add('sebastianmarkow/deoplete-rust') " rust completion
   call dein#add('roxma/nvim-completion-manager')
 
-	call dein#end()
-	call dein#save_state()
+  call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
+  call dein#end()
+  call dein#save_state()
 endif
 
 if dein#check_install()
-	call dein#install()
+  call dein#install()
 endif
 
 filetype plugin indent on
 syntax enable
 
 set t_Co=256
+set encoding=utf-8
 set title
 set background=dark
 set number
@@ -124,7 +125,7 @@ set scrolloff=5
 set sidescrolloff=15
 set sidescroll=5
 
-autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set ai sw=2 sts=2 et
+autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set expandtab ai sw=2 sts=2 et
 autocmd FileType python set sw=4 sts=4 et
 autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
 
@@ -147,39 +148,61 @@ map <Leader>] :bnext<CR>
 " ===== Neomake ======
 " autocmd! BufWritePost,BufEnter * Neomake
 let g:neomake_open_list = 2
-call neomake#configure#automake('rw', 1000)
+let g:neomake_list_height = 15
+let g:neomake_verbose = 0 " default is 1
+call neomake#configure#automake('nw', 500)
 
 " ====== Airline ======
+
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#right_sep = ' '
-let g:airline#extensions#tabline#right_alt_sep = '|'
-let g:airline_left_sep = ' '
-let g:airline_left_alt_sep = '|'
-let g:airline_right_sep = ' '
-let g:airline_right_alt_sep = '|'
 
-let g:airline_theme='tender'
-" let g:airline_theme='badwolf'
-" let g:airline_theme='dark theme with powerline symbols'
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
 
-colorscheme tender
-" colorscheme desert " dark bg, light pastel text
-" colorscheme elflord " black bg, neon darker text
-" colorscheme evening " dark bg, light neon text
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = '☰'
+let g:airline_symbols.maxlinenr = ''
+
+
+let g:airline_powerline_fonts=1
+let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
+let g:airline#extensions#quickfix#location_text = 'Location'
+
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
+let g:airline#extensions#whitespace#symbol = '!'
+let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
+
+let g:airline#extensions#whitespace#show_message = 1
+
+let g:airline#extensions#neomake#enabled = 1
+
+" ====== Looks and FEELS =======
+" let g:airline_theme='luna'
+let g:airline_theme='base16_spacemacs'
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+
+colorscheme OceanicNext
 
 " ===== Deoplete =====
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#tag#cache_limit_size = 20000000
 let g:deoplete#max_list = 30
-let g:deoplete#enable_camel_case = 1
-let g:deoplete#sources#omni#input_patterns = {
-\   "ruby" : '[^. *\t]\.\w*\|\h\w*::'
-\}
+let g:deoplete#enable_refresh_always = 1
+let g:deoplete#auto_complete_delay = 75
+let g:deoplete#auto_refresh_delay = 350
+
+let g:deoplete#sources = {}
 
 " use tab
 imap <silent><expr> <TAB>
@@ -231,17 +254,17 @@ let g:tagbar_type_ruby = {
 
   " == Rust ==
 let g:tagbar_type_rust = {
-	\ 'ctagstype' : 'rust',
-	\ 'kinds' : [
-		\'T:types,type definitions',
-		\'f:functions,function definitions',
-		\'g:enum,enumeration names',
-		\'s:structure names',
-		\'m:modules,module names',
-		\'c:consts,static constants',
-		\'t:traits',
-		\'i:impls,trait implementations',
-	\]
+  \ 'ctagstype' : 'rust',
+  \ 'kinds' : [
+    \'T:types,type definitions',
+    \'f:functions,function definitions',
+    \'g:enum,enumeration names',
+    \'s:structure names',
+    \'m:modules,module names',
+    \'c:consts,static constants',
+    \'t:traits',
+    \'i:impls,trait implementations',
+  \]
 \}
 
 
