@@ -78,7 +78,7 @@ filetype plugin indent on
 syntax enable
 
 set t_Co=256
-set encoding=utf-8
+set encoding=UTF-8
 set title
 set background=dark
 set number
@@ -160,7 +160,7 @@ call neomake#configure#automake('nw', 500)
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts = 1
 
 let g:airline#extensions#quickfix#quickfix_text = 'Quickfix'
 let g:airline#extensions#quickfix#location_text = 'Location'
