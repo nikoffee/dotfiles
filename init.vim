@@ -29,6 +29,8 @@ if dein#load_state(s:plugin_dir)
   call dein#add('Shougo/echodoc.vim')
 
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
+  call dein#add('othree/yajs.vim') " Better js lexical highlighting
+  call dein#add('othree/html5.vim') " Better html lexical highlighting
 
   call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
