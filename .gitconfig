@@ -22,6 +22,7 @@
 [alias]
   d = diff
   dc = diff --cached
+  dt = difftool
   s = status
   c = commit
   ca = commit --amend
