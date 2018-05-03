@@ -1,4 +1,4 @@
-DEFAULT_USER="greg"
+export DEFAULT_USER="greghoule"
 ZSH_THEME="agnoster"
 COMPLETION_WAITING_DOTS="true"
 
@@ -105,3 +105,5 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/bin:$PATH"
 export PATH="/usr/local/opt/icu4c/sbin:$PATH"
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
