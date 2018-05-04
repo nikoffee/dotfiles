@@ -34,6 +34,7 @@
   f = fetch
   unstage = reset HEAD --
   last = log -1 HEAD
+  ls = log --full-diff -p
 [core]
   excludesfile = ~/.gitignore_global
   autocrlf = input
