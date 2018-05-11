@@ -35,6 +35,9 @@
   unstage = reset HEAD --
   last = log -1 HEAD
   ls = log --full-diff -p
+  l = log
+  pom = pull origin master
+  prom = pull --rebase origin master
 [core]
   excludesfile = ~/.gitignore_global
   autocrlf = input
