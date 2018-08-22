@@ -39,3 +39,5 @@ done
 
 ln -sfn $dir/snippets/* $nvim_snippets/
 echo "...\nDone"
+
+cd $cur_dir
