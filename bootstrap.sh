@@ -7,10 +7,26 @@ brew_dump=$dir/startup/brew
 files=".bash_profile .bashrc .gitconfig .pryrc .vimrc .zshrc"
 
 echo "Initial Brew setup"
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if command -v brew 2>/dev/null; then
+  echo "Already have brew <3\n"
+else
+  echo "Missing brew\nInstalling now...\n"
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 cd $brew_dump
 brew bundle
 cd $cur_dir
+echo "...\nDone\n"
+
+echo "Initial oh-my-zsh setup"
+if $(command -v $ZSH) 2>/dev/null; then
+  echo "Already have oh-my-zsh"
+  echo "upgrading oh-my-zsh"
+  upgrade_oh_my_zsh
+else
+  echo "Missing oh-my-zsh\nInstalling now...\n"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+fi
 echo "...\nDone\n"
 
 nvim_dir=~/.config/nvim
