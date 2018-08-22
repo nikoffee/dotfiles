@@ -50,6 +50,8 @@ printf "Make necessary dirs"
 mkdir -p $nvim_dir
 mkdir -p $nvim_snippets
 
+sh $dir/bootstrap_dein.sh
+
 printf "Move old dotfiles and link new ones..."
 for file in $files; do
   mv ~/$file $old_dir/ 2>/dev/null
