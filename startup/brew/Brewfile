@@ -3,7 +3,6 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
-tap "homebrew/dupes"
 tap "homebrew/services"
 tap "shopify/shopify"
 tap "universal-ctags/universal-ctags"
@@ -22,7 +21,6 @@ brew "gettext"
 brew "libffi"
 brew "pcre", args: ["HEAD"]
 brew "glib"
-brew "chromedriver"
 brew "cloc", args: ["HEAD"]
 brew "cmake", args: ["HEAD"]
 brew "coreutils", args: ["HEAD"]
