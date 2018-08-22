@@ -81,11 +81,15 @@ burp_proxy_off() {
 }
 
 dns_clear() {
-  networksetup -setdnsservers 'Wi-Fi'
+  networksetup -setdnsservers 'Wi-Fi' nil
 }
 
 dns_google() {
   networksetup -setdnsservers 'Wi-Fi' 8.8.8.8 8.8.4.4
+}
+
+reset_touchbar() {
+killall ControlStrip
 }
 
 if which ruby >/dev/null && which gem >/dev/null; then
