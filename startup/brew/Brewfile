@@ -1,0 +1,125 @@
+tap "burntsushi/ripgrep", "https://github.com/BurntSushi/ripgrep.git"
+tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/core"
+tap "homebrew/dupes"
+tap "homebrew/services"
+tap "shopify/shopify"
+tap "universal-ctags/universal-ctags"
+cask "java"
+brew "apr"
+brew "openssl"
+brew "apr-util"
+brew "autoconf"
+brew "automake"
+brew "bison"
+brew "cabal-install"
+brew "libpng"
+brew "freetype"
+brew "fontconfig"
+brew "gettext"
+brew "libffi"
+brew "pcre", args: ["HEAD"]
+brew "glib"
+brew "chromedriver"
+brew "cloc", args: ["HEAD"]
+brew "cmake", args: ["HEAD"]
+brew "coreutils", args: ["HEAD"]
+brew "libusb", args: ["HEAD"]
+brew "dfu-util", args: ["HEAD"]
+brew "docbook"
+brew "docbook-xsl"
+brew "doxygen", args: ["HEAD"]
+brew "editorconfig", args: ["HEAD"]
+brew "icu4c"
+brew "jpeg"
+brew "libtiff"
+brew "libtool"
+brew "fontforge"
+brew "webp", args: ["HEAD"]
+brew "gd", args: ["HEAD"]
+brew "gdbm"
+brew "gengetopt"
+brew "git"
+brew "gmp"
+brew "libunistring"
+brew "graphviz"
+brew "haskell-stack"
+brew "node"
+brew "heroku"
+brew "readline"
+brew "sqlite"
+brew "xz"
+brew "python", args: ["with-tcl-tk"]
+brew "httpie"
+brew "idris"
+brew "imagemagick", args: ["HEAD"], link: false
+brew "imagemagick@6"
+brew "jemalloc", args: ["HEAD"]
+brew "jruby"
+brew "jython"
+brew "lz4", args: ["HEAD"]
+brew "lzlib"
+brew "librdkafka"
+brew "kafkacat"
+brew "libevent"
+brew "libgpg-error"
+brew "libgcrypt"
+brew "libgda"
+brew "libgraphqlparser"
+brew "libidn2", args: ["HEAD"]
+brew "libksba"
+brew "libssh2", args: ["HEAD"]
+brew "libtermkey"
+brew "libuv", args: ["HEAD"]
+brew "libvterm"
+brew "libxml2", args: ["HEAD"], link: true
+brew "libyaml"
+brew "lua"
+brew "lua@5.1"
+brew "luajit", args: ["HEAD"]
+brew "mercurial"
+brew "msgpack"
+brew "mysql", restart_service: true
+brew "unibilium"
+brew "neovim"
+brew "openssl@1.1"
+brew "perl", args: ["HEAD"]
+brew "phantomjs"
+brew "pkg-config"
+brew "plantuml"
+brew "postgresql"
+brew "ruby"
+brew "ruby-build", args: ["HEAD"]
+brew "ruby-install", args: ["HEAD"]
+brew "rust"
+brew "selenium-server-standalone"
+brew "snappy"
+brew "sphinx-doc"
+brew "subversion"
+brew "task"
+brew "tcl-tk"
+brew "texinfo"
+brew "the_silver_searcher", args: ["HEAD"]
+brew "tmux", args: ["HEAD"]
+brew "tree"
+brew "v8"
+brew "watchman", args: ["HEAD"]
+brew "yarn"
+brew "zlib"
+brew "zsh-syntax-highlighting"
+brew "burntsushi/ripgrep/ripgrep-bin"
+brew "shopify/shopify/ejson"
+brew "shopify/shopify/libzookeeper"
+brew "shopify/shopify/mysql-client", link: false
+brew "shopify/shopify/shopify-graphicsmagick", args: ["HEAD"]
+brew "shopify/shopify/shopify-imagemagick@6", link: true
+brew "shopify/shopify/shopify-ruby"
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+cask "font-iosevka"
+cask "font-source-code-pro"
+cask "gitify"
+cask "google-cloud-sdk"
+cask "mono-mdk"
+cask "sonarr"
