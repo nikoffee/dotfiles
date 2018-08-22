@@ -19,7 +19,7 @@ cd $cur_dir
 echo "...\nDone\n"
 
 echo "Initial oh-my-zsh setup"
-if $(command -v $ZSH) 2>/dev/null; then
+if command -v zsh 2>/dev/null; then
   echo "Already have oh-my-zsh"
   echo "upgrading oh-my-zsh"
   upgrade_oh_my_zsh
