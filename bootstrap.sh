@@ -13,6 +13,7 @@ else
   echo -e "Missing brew\nInstalling now...\n"
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+brew install zsh coreutils dfu-util editorconfig ejson fontconfig gd gdbm gettext ghc git glib gmp gnutls haskell-stack httpie icu4c idris imagemagick lua mysql mysql-client neovim node openssl perl pkg-config postgresql python3 readline ripgrep-bin ruby rust sqlite subversion task tcl-tk the_silver_searcher tmux tree universal-ctags v8 watchman webp wget xz yarn zlib zsh-syntax-highlighting
 cd $brew_dump
 brew bundle
 cd $cur_dir
