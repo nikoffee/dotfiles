@@ -15,9 +15,8 @@ let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
 let s:plugin_dir=s:bundle_dir . '/repos/github.com'
 
 " ======== Python =========
+" let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog = '/usr/local/bin/python2.7'
-let g:loaded_python_provider = 1
 
 if dein#load_state(s:plugin_dir)
   call dein#begin(s:plugin_dir)
@@ -46,7 +45,6 @@ if dein#load_state(s:plugin_dir)
 
   call dein#add('tpope/vim-fugitive') " needed for airline branch
 
-  call dein#add('critiqjo/lldb.nvim')
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
   call dein#add('MarcWeber/hasktags')
@@ -66,6 +64,7 @@ if dein#load_state(s:plugin_dir)
   call dein#add('rust-lang/rust.vim') " rust integration
   call dein#add('sebastianmarkow/deoplete-rust') " rust completion
   call dein#add('roxma/nvim-completion-manager')
+  call dein#add('critiqjo/lldb.nvim')
 
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
   call dein#end()

@@ -6,7 +6,7 @@ export SHOPIFY_HOME=$HOME/src/github.com/Shopify
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
-export PYTHON_PATH="/usr/local/lib/python3.6/site-packages:/usr/local/lib/python2.7/site-packages:$PYTHON_PATH"
+export PYTHON_PATH="/usr/local/lib/python$(python3 -V | grep -Eo "\d{1}\.\d{1}")/site-packages:/usr/local/lib/python2.7/site-packages:$PYTHON_PATH"
 
 plugins=(gem git brew colorize cp powerline sublime history sudo web-search pip zsh-syntax-highlighting forklift osx python rsync screen tmux vundle gnu-utils colored-man-pages mosh ruby rails)
 
