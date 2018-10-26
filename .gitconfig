@@ -1,7 +1,7 @@
 [include]
-  path = $HOME/home.gitconfig
-[includeIf "gitdir/i:$HOME/src/github.com/Shopify"]
-    path = $HOME/work.gitconfig
+  path = "/Users/greg/home.gitconfig"
+[includeIf "gitdir/i:~/src/github.com/Shopify/**"]
+  path = "/Users/greg/work.gitconfig"
 
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
