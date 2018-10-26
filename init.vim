@@ -10,18 +10,16 @@ else
   let s:editor_root = expand("$HOME/.vim")
 endif
 
-set runtimepath+=$HOME/.config/nvim/bundle/repos/github.com/Shougo/dein.vim
-let s:bundle_dir=expand("$HOME/.config/nvim/bundle")
-let s:plugin_dir=s:bundle_dir . '/repos/github.com'
+set runtimepath+=$HOME/.cache/dein/Shougo/dein.vim
+let s:bundle_dir=expand("$HOME/.cache/dein")
 
 " ======== Python =========
-" let g:python_host_prog = '/usr/local/bin/python2'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
-if dein#load_state(s:plugin_dir)
-  call dein#begin(s:plugin_dir)
+if dein#load_state(s:bundle_dir)
+  call dein#begin(s:bundle_dir)
 
-  call dein#add(s:plugin_dir . '/Shougo/dein.vim')
+  call dein#add(s:bundle_dir . '/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/denite.nvim')
