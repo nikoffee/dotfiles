@@ -4,7 +4,7 @@ cur_dir=$(pwd)
 dir=~/dotfiles
 old_dir=~/dotfiles_old
 brew_dump=$dir/startup/brew
-files=".bash_profile .bashrc .gitconfig .pryrc .vimrc .zshrc"
+files=".bash_profile .bashrc .gitconfig .pryrc .vimrc .zshrc work.gitconfig home.gitconfig"
 
 printf "Initial Brew setup"
 if command -v brew 2>/dev/null; then

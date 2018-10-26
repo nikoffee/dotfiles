@@ -1,24 +1,46 @@
-[user]
-	name = Greg Houle
-	email = greg.houle@shopify.com
+[include]
+  path = $HOME/home.gitconfig
+[includeIf "gitdir/i:$HOME/src/github.com/Shopify"]
+    path = $HOME/work.gitconfig
+
 [mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustexitcode = true
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
 [merge]
-	tool = Kaleidoscope
+  tool = Kaleidoscope
+  ff = only
 [difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 [difftool]
-	prompt = false
+  prompt = false
 [mergetool]
-	prompt = false
-	keepBackup = false
+  prompt = false
+  keepBackup = false
 [diff]
-	tool = Kaleidoscope
+  tool = Kaleidoscope
+  algorithm = patience
+
+[pull]
+  rebase = true
 [push]
-	default = upstream
-[github]
-	user = sorryeh
+  default = simple
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+[help]
+  autocorrect = 1
+
+[color]
+  ui = true
+[color "branch"]
+  current = green reverse
+  local = yellow
+  remote = red
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = red
+
 [alias]
   d = diff
   dc = diff --cached
@@ -30,16 +52,15 @@
   ch = checkout
   a = add
   w = whatchanged
-  b = branch
+  b = branch -av
   f = fetch
   unstage = reset HEAD --
   last = log -1 HEAD
   ls = log --full-diff -p
   l = log
-  pom = pull origin master
-  prom = pull --rebase origin master
-[core]
-  excludesfile = ~/.gitignore_global
-  autocrlf = input
-[help]
-  autocorrect = 1
+  prune = fetch --prune
+  undo = reset --soft HEAD^
+  stash-all = stash save --include-untracked
+  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+  churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
