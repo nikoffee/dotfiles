@@ -37,8 +37,8 @@
   local = yellow
   remote = red
 [color "status"]
-  added = yellow
-  changed = green
+  added = green
+  changed = yellow
   untracked = red
 
 [alias]
