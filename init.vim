@@ -190,7 +190,6 @@ let g:deoplete#auto_complete_delay = 75
 let g:deoplete#auto_refresh_delay = 350
 
 let g:deoplete#sources = {}
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ==== Git Gutter ====
