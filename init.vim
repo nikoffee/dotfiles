@@ -61,7 +61,10 @@ if dein#load_state(s:bundle_dir)
   call dein#add('rizzatti/dash.vim') " dash integration
   call dein#add('rust-lang/rust.vim') " rust integration
   call dein#add('sebastianmarkow/deoplete-rust') " rust completion
-  call dein#add('roxma/nvim-completion-manager')
+  call dein#add('ncm2/ncm2')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('ncm2/ncm2-gtags')
+  call dein#add('ncm2/ncm2-syntax')
   call dein#add('critiqjo/lldb.nvim')
 
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
@@ -374,3 +377,9 @@ set nofoldenable
 "autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
             "\   bd|
             "\   q | endif
+
+set completeopt=noinsert,menuone,noselect
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set shortmess+=c
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
