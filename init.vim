@@ -46,7 +46,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('neovimhaskell/haskell-vim')
   call dein#add('eagletmt/ghcmod-vim')
   call dein#add('MarcWeber/hasktags')
-  call dein#add('eagletmt/neco-ghc')
   call dein#add('idris-hackers/idris-vim') " idris integration
   call dein#add('brooth/far.vim') " search replace utility
   call dein#add('mhinz/vim-grepper')
