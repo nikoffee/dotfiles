@@ -26,13 +26,13 @@ if dein#load_state(s:bundle_dir)
   call dein#add('Shougo/echodoc.vim')
 
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
+  call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
-  call dein#add('othree/html5.vim') " Better html lexical highlighting
 
   call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
   "call dein#add('w0rp/ale') " Async Lint Engine
-
+  call dein#add('neovim/matchit.vim')
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
@@ -40,19 +40,11 @@ if dein#load_state(s:bundle_dir)
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
   call dein#add('airblade/vim-gitgutter')
   call dein#add('majutsushi/tagbar') " project structure via tags
-
   call dein#add('tpope/vim-fugitive') " needed for airline branch
-
-  call dein#add('neovimhaskell/haskell-vim')
-  call dein#add('eagletmt/ghcmod-vim')
-  call dein#add('MarcWeber/hasktags')
-  call dein#add('idris-hackers/idris-vim') " idris integration
   call dein#add('brooth/far.vim') " search replace utility
   call dein#add('mhinz/vim-grepper')
-
   call dein#add('janko-m/vim-test')
   call dein#add('skywind3000/asyncrun.vim') " run your tests inside nvim
-
   call dein#add('tpope/vim-dispatch')
   call dein#add('tpope/vim-rails')
   call dein#add('tpope/vim-bundler')
@@ -272,7 +264,6 @@ let g:grepper.quickfix      = 1
 
 " ====== Async Run test ======
 let g:asyncrun_mode = 0
-let g:airline_section_error = airline#section#create_right(['%{g:asyncrun_status}'])
 let g:asyncrun_rootmarks = ['.git', '.root', '.bzr', '_darcs', 'build.xml']
 let test#strategy = "asyncrun"
 let g:asyncrun_open = 12
@@ -378,7 +369,7 @@ set nofoldenable
             "\   q | endif
 
 set completeopt=noinsert,menuone,noselect
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
