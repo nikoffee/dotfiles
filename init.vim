@@ -32,7 +32,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
 
   "call dein#add('w0rp/ale') " Async Lint Engine
-  call dein#add('neovim/matchit.vim')
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
