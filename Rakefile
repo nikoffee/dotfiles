@@ -11,27 +11,28 @@ task :install do
 
   install_xcode
   install_homebrew
-  setup_neovm
+  setup_neovim
   Rake::Task[:install_dein].execute
 
-  install_files Dir.glob("git/*")
-  install_files Dir.glob("irb/*")
-  install_files Dir.glob("ruby/*")
-  install_files Dir.glob("ctags/*")
-  install_files Dir.glob("nvim/*"), dir: '.config/nvim/'
-  install_files Dir.glob("vim/*")
-  install_files Dir.glob("python/*")
-
+  Rake::Task[:link_dotfiles].execute
   Rake::Task[:install_omz].execute
-
   install_fonts
-  install_iterm_theme
-
   Rake::Task[:install_mac_apps].execute
-
+  install_iterm_theme
   setup_bundle_config
 
   exit_with_success
+end
+
+desc "Link all the dotfiles"
+task :link_dotfiles do
+  install_files Dir.glob("nvim/*"), dir: '.config/nvim/'
+  install_files Dir.glob("git/*")
+  install_files Dir.glob("irb/*")
+  install_files Dir.glob("ruby/*")
+  install_files Dir.glob("vim/*")
+  install_files Dir.glob("python/*")
+  install_files Dir.glob("sh/*")
 end
 
 task :install_omz do
@@ -147,12 +148,8 @@ def install_homebrew
 end
 
 def brewfile
-  brewfile_dir = File.join(Dir.pwd, "startup", "brew")
-  run %{
-    cd #{brewfile_dir}
-    brew bundle
-    cd #{ROOT}
-  }
+  brewfile = File.join(ROOT, "brew", "Brewfile")
+  run %{ brew bundle install --file=#{brewfile} }
 end
 
 def install_rustup
@@ -160,11 +157,13 @@ def install_rustup
 end
 
 def install_fonts
-  run "cp -f $HOME/.fonts/* $HOME/Library/Fonts"
+  run "cp -f #{File.join(ROOT, "fonts", "/*")} $HOME/Library/Fonts"
 end
 
 def install_iterm_theme
-  # TODO
+  iterm_plist_path = File.join(ROOT, "iterm", "com.googlecode.iterm2.plist")
+  return unless File.exists?(iterm_plist_path)
+  run %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
 end
 
 def install_omz
