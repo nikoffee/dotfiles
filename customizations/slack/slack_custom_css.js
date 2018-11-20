@@ -2,25 +2,26 @@
 document.addEventListener("DOMContentLoaded", function() {
   const cssContent = `
     :root {
-       /* THEME COLOURS: */
-       --primary: #09F;
-       --text: #DDD;
-       --background: #111;
-       --background-elevated: #222;
+      /* THEME COLOURS: */
+      --primary: #09F;
+      --text: #DDD;
+      --background: #111;
+      --background-elevated: #222;
 
-       /* LESS IMPORTANT */
-       --background-hover: rgba(255, 255, 255, 0.1);
-       --background-light: #AAA;
-       --background-bright: #FFF;
+      /* LESS IMPORTANT */
+      --background-hover: rgba(255, 255, 255, 0.1);
+      --background-light: #AAA;
+      --background-bright: #FFF;
+      --background-medium: #666;
 
-       --border-dim: #666;
-       --border-bright: var(--primary);
+      --border-dim: #666;
+      --border-bright: var(--primary);
 
-       --text-bright: #FFF;
-       --text-special: var(--primary);
+      --text-bright: #E00000;
+      --text-special: var(--primary);
 
-       --scrollbar-background: #000;
-       --scrollbar-border: var(--primary);
+      --scrollbar-background: #000;
+      --scrollbar-border: var(--primary);
     }
 
     h1, h2, h3, h4 {
@@ -91,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     .channel_header, #col_messages, #footer {
-       box-shadow: none;
+       box-shadow: 0px 6px var(--background);
     }
 
     /* CHANNEL LIST */
@@ -141,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function() {
        border-width: 1px 1px 1px 0;
     }
 
-    /* TODO; NOT WORKING*/
+    /* TODO; NOT WORKING */
     li.active[class] span,
     #channels_scroller.show_which_channel_is_active[class] ul li.active .primary_action .prefix,
     #channels_scroller.show_which_channel_is_active[class] ul li.active .primary_action,
@@ -170,7 +171,6 @@ document.addEventListener("DOMContentLoaded", function() {
     /* UNREAD MENTIONS */
     .p-channel_sidebar__badge,
     .p-channel_sidebar__banner--mentions {
-       /*inverted because important*/
        background-color: var(--border-bright) !important;
        border-color: var(--text-bright);
        color: var(--text-bright);
@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     #msg_input, #primary_file_button {
-      background: transparent !important;
+      background: var(--background-medium) !important;
       color: var(--text) !important;
       border-color: var(--border-dim) !important;
     }
@@ -252,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
        border-color: var(--border-dim) !important;
        color: var(--text) !important;
     }
+
     textarea:focus, input[type="text"]:focus, #file_comment_textarea {
        border-color: var(--border-bright) !important;
        color: var(--text-bright) !important;
@@ -467,7 +468,7 @@ document.addEventListener("DOMContentLoaded", function() {
      color: #aaa !important;
     }
 
-    #msgs_div .unread_divider.no_unreads hr{
+    #msgs_div .unread_divider.no_unreads hr {
       border-top-color: #888 !important;
     }
 
@@ -680,6 +681,7 @@ document.addEventListener("DOMContentLoaded", function() {
       background: var(--background) !important;
       border: 1px solid var(--border-dim) !important;
     }
+
     /* EDITOR IN THREAD */
     #convo_tab .message_input, #convo_tab textarea#msg_text {
        color: var(--text) !important;
@@ -979,11 +981,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     /* WHAT WE MODIFY TO CUSTOMIZE COLOURS */
     :root {
-      /* Modify these to change your theme colors: */
-      --primary: #61AFEF;
-      --text: #ABB2BF;
-      --background: #282C34;
-      --background-elevated: #3B4048;
+      --primary: #CACACA;
+      --text: #DEDEDE;
+      --background: #151515;
+      --background-elevated: #252525;
     }
 
     div.c-message.c-message--light.c-message--hover {
@@ -1027,7 +1028,7 @@ document.addEventListener("DOMContentLoaded", function() {
     a.c-message__sender_link,
     span.c-message_attachment__media_trigger.c-message_attachment__media_trigger--caption,
     div.p-message_pane__foreword__description span {
-      color: #afafaf !important;
+      color: #c1c1c1 !important;
     }
 
     pre.special_formatting {

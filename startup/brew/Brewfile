@@ -13,13 +13,14 @@ brew "apr-util"
 brew "autoconf"
 brew "automake"
 brew "bison"
+brew "brew-cask-completion"
+brew "ghc"
 brew "cabal-install"
 brew "libpng"
 brew "freetype"
 brew "fontconfig"
 brew "gettext"
 brew "libffi"
-brew "pcre", args: ["HEAD"]
 brew "glib"
 brew "cloc", args: ["HEAD"]
 brew "cmake", args: ["HEAD"]
@@ -30,31 +31,32 @@ brew "docbook"
 brew "docbook-xsl"
 brew "doxygen", args: ["HEAD"]
 brew "editorconfig", args: ["HEAD"]
-brew "icu4c"
+brew "gdbm"
 brew "jpeg"
 brew "libtiff"
-brew "libtool"
+brew "readline"
+brew "sqlite"
 brew "fontforge"
 brew "webp", args: ["HEAD"]
-brew "gd", args: ["HEAD"]
-brew "gdbm"
 brew "gengetopt"
 brew "git"
 brew "gmp"
 brew "libunistring"
+brew "libgpg-error"
+brew "libgcrypt"
+brew "libksba"
+brew "gnupg"
 brew "graphviz"
 brew "haskell-stack"
 brew "node"
 brew "heroku"
-brew "readline"
-brew "sqlite"
-brew "xz"
-brew "python", args: ["with-tcl-tk"]
+brew "python"
 brew "httpie"
 brew "idris"
+brew "libxml2", args: ["HEAD"], link: true
 brew "imagemagick", args: ["HEAD"], link: false
 brew "imagemagick@6"
-brew "jemalloc", args: ["HEAD"]
+brew "jq"
 brew "jruby"
 brew "jython"
 brew "lz4", args: ["HEAD"]
@@ -62,33 +64,27 @@ brew "lzlib"
 brew "librdkafka"
 brew "kafkacat"
 brew "libevent"
-brew "libgpg-error"
-brew "libgcrypt"
 brew "libgda"
 brew "libgraphqlparser"
-brew "libidn2", args: ["HEAD"]
-brew "libksba"
+brew "libidn2"
 brew "libssh2", args: ["HEAD"]
-brew "libtermkey"
-brew "libuv", args: ["HEAD"]
-brew "libvterm"
-brew "libxml2", args: ["HEAD"], link: true
+brew "libuv"
 brew "libyaml"
 brew "lua"
 brew "lua@5.1"
-brew "luajit", args: ["HEAD"]
+brew "mas"
+brew "memcached"
 brew "mercurial"
-brew "msgpack"
 brew "mysql", restart_service: true
-brew "unibilium"
+brew "mysql@5.7", restart_service: true, link: true
 brew "neovim"
 brew "openssl@1.1"
 brew "perl", args: ["HEAD"]
-brew "phantomjs"
 brew "pkg-config"
 brew "plantuml"
 brew "postgresql"
-brew "ruby"
+brew "redis"
+brew "ruby", link: true
 brew "ruby-build", args: ["HEAD"]
 brew "ruby-install", args: ["HEAD"]
 brew "rust"
@@ -104,8 +100,11 @@ brew "tmux", args: ["HEAD"]
 brew "tree"
 brew "v8"
 brew "watchman", args: ["HEAD"]
+brew "wine"
+brew "winetricks"
 brew "yarn"
 brew "zlib"
+brew "zsh", args: ["with-gdbm", "with-pcre"]
 brew "zsh-syntax-highlighting"
 brew "burntsushi/ripgrep/ripgrep-bin"
 brew "shopify/shopify/ejson"
@@ -114,10 +113,24 @@ brew "shopify/shopify/mysql-client", link: false
 brew "shopify/shopify/shopify-graphicsmagick", args: ["HEAD"]
 brew "shopify/shopify/shopify-imagemagick@6", link: true
 brew "shopify/shopify/shopify-ruby"
+brew "shopify/shopify/toxiproxy"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
+cask "chromedriver"
 cask "font-iosevka"
 cask "font-source-code-pro"
 cask "gitify"
 cask "google-cloud-sdk"
 cask "mono-mdk"
 cask "sonarr"
+mas "Affinity Photo", id: 824183456
+mas "Keynote", id: 409183694
+mas "Monosnap", id: 540348655
+mas "Notability", id: 736189492
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "PCalc", id: 403504866
+mas "SketchBook", id: 863486266
+mas "Slack", id: 803453959
+mas "The Unarchiver", id: 425424353
+mas "Wake Up Time", id: 495945638
+mas "YubiKey Personalization Tool", id: 638161122
