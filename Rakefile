@@ -12,8 +12,8 @@ task :install do
   install_xcode
   install_homebrew
   setup_neovim
+  Rake::Task[:install_private_fonts].execute
   Rake::Task[:install_dein].execute
-
   Rake::Task[:link_dotfiles].execute
   Rake::Task[:install_omz].execute
   install_fonts
@@ -22,6 +22,12 @@ task :install do
   setup_bundle_config
 
   exit_with_success
+end
+
+task :install_private_fonts do
+  run %{
+    svn export --username=nikoffee https://github.com/nikoffee/paid_fonts/trunk/fonts/ #{File.join(ROOT, "fonts/")}
+  }
 end
 
 desc "Link all the dotfiles"
