@@ -19,6 +19,8 @@ task :install do
   install_files Dir.glob("ruby/*")
   install_files Dir.glob("ctags/*")
   install_files Dir.glob("nvim/*"), dir: '.config/nvim/'
+  install_files Dir.glob("vim/*")
+  install_files Dir.glob("python/*")
 
   Rake::Task[:install_omz].execute
 

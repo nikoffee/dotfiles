@@ -1,3 +1,0 @@
-# Setup Slack customizations
-
-
