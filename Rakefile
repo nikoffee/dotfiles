@@ -13,8 +13,8 @@ task :install do
   setup_neovim
   Rake::Task[:install_private_fonts].execute
   Rake::Task[:install_dein].execute
-  Rake::Task[:install_omz].execute
   Rake::Task[:link_dotfiles].execute
+  Rake::Task[:install_omz].execute
   install_fonts
   Rake::Task[:install_mac_apps].execute
   install_iterm_theme
@@ -177,6 +177,7 @@ def install_omz
       curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     }
   end
+  install_files Dir.glob("vim/zshrc")
 end
 
 def install_files(files, dir: '.', method: :symlink)
