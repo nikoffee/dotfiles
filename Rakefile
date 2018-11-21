@@ -171,7 +171,7 @@ end
 
 def install_omz
   if File.exists?(File.expand_path("~/.oh-my-zsh"))
-    upgrade_oh_my_zsh
+    run "upgrade_oh_my_zsh"
   else
     run %{
       curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
