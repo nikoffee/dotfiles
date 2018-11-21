@@ -144,7 +144,7 @@ def install_homebrew
 
   run "brew update"
 
-  run "brew install zsh rust python3 ruby mas haskell-stack zsh-syntax-highlighting postgresql neovim idris sqlite git openssl node"
+  run "brew install zsh python3 ruby mas haskell-stack zsh-syntax-highlighting postgresql neovim idris sqlite git openssl node"
   install_rustup
 
   brewfile
