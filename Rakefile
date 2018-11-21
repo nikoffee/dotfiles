@@ -9,7 +9,6 @@ task :install do
   puts "Installing your environment."
   puts "=============================="
 
-  install_xcode
   install_homebrew
   setup_neovim
   Rake::Task[:install_private_fonts].execute
@@ -207,10 +206,6 @@ def setup_neovim
   run "npm install -g neovim"
 
   FileUtils.mkdir_p(File.expand_path("$HOME/.config/nvim/")) unless File.exists?(File.expand_path("$HOME/.config/nvim"))
-end
-
-def install_xcode
-  run "xcode-select --install"
 end
 
 def cask_install(app)
