@@ -25,7 +25,7 @@ end
 
 task :install_private_fonts do
   run %{
-    svn export --username=nikoffee https://github.com/nikoffee/paid_fonts/trunk/fonts/ #{File.join(ROOT, "fonts/")}
+    svn export --force --username=nikoffee https://github.com/nikoffee/paid_fonts/trunk/fonts/ #{File.join(ROOT, "fonts/")}
   }
 end
 
