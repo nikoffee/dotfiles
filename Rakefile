@@ -50,7 +50,7 @@ task :install_mac_apps do
   cask_install "fantastical"
   cask_install "bartender"
   cask_install "1password"
-  cask install "evernote"
+  cask_install "evernote"
   cask_install "slack"
   cask_install "google-chrome"
   cask_install "the-unarchiver"
@@ -93,18 +93,16 @@ task :install_dein do
   FileUtils.mkdir_p(dein_path) unless File.exists? dein_path
 
   unless File.exists?(File.join(dein_path, "installer.sh"))
+    dein_installer_path = File.join(dein_path, "installer.sh")
     run %{
-      cd #{dein_path}
-      curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-      sh ./installer.sh .
-      cd #{ROOT}
+      curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > #{dein_installer_path}
+      sh #{dein_installer_path} #{dein_path}
     }
   end
 end
 
 desc "Setup a dark theme for slack"
 task :setup_dark_slack do
-
 end
 
 task :default => :install
@@ -175,15 +173,17 @@ def install_omz
   if File.exists?(File.expand_path("$HOME/.oh-my-zsh"))
     upgrade_oh_my_zsh
   else
-    run %{ sh -c #{run "curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh"} }
+    run %{
+      curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh -c
+    }
   end
 end
 
 def install_files(files, dir: '.', method: :symlink)
   files.each do |f|
     file = f.split('/').last
-    source = "#{ENV["PWD"]}/#{f}"
-    target = "#{ENV["HOME"]}/#{dir}#{file}"
+    source = "#{File.join(ROOT, f)}"
+    target = "#{File.expand_path(File.join("$HOME", dir, file))}"
 
     if File.exists?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
       puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
