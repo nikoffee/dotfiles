@@ -180,9 +180,10 @@ def install_omz
   install_files Dir.glob("vim/zshrc")
 end
 
-def install_files(files, dir: '.', method: :symlink)
+def install_files(files, dir: '', method: :symlink)
   files.each do |f|
     file = f.split('/').last
+    file = '.' + file if dir.empty?
     source = "#{File.join(ROOT, f)}"
     target = "#{File.expand_path(File.join("~", dir, file))}"
 
