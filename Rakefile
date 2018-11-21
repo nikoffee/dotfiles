@@ -167,6 +167,7 @@ def install_iterm_theme
   iterm_plist_path = File.join(ROOT, "iterm", "com.googlecode.iterm2.plist")
   return unless File.exists?(iterm_plist_path)
   run %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
+  run %{ defaults read com.googlecode.iterm2 }
 end
 
 def install_omz
