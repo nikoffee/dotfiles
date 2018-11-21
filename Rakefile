@@ -28,6 +28,19 @@ end
 desc "Setup Work dev env"
 task :setup_work do
   Rake::Task[:setup_ssh].execute
+  Rake::Task[:setup_dev].execute
+end
+
+desc "Setup Shopify dev"
+task :setup_dev do
+  run %{ eval "$(curl -sS https://dev.shopify.io/up)" }
+  run %{ dev clone onboarding-sandbox }
+  puts "\n\n==============================\n| do:                        |\n| $ dev cd onboarding-sandbox |\n| $ dev up                   |\n==============================\n\n"
+  puts "\n\nWant to setup Shopify core, which can be very long? (y/n)\n\n"
+  user = gets.chomp
+  unless user == 'n'
+    run %{ dev clone shopify }
+  end
 end
 
 desc "Setup ssh for github"
