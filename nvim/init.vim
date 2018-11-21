@@ -10,7 +10,7 @@ else
   let s:editor_root = expand("$HOME/.vim")
 endif
 
-set runtimepath+=$HOME/.cache/dein/Shougo/dein.vim
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 let s:bundle_dir=expand("$HOME/.cache/dein")
 
 " ======== Python =========
