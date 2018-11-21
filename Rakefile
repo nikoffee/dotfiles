@@ -140,7 +140,7 @@ def generate_ssh(account:, email:)
   CONFIG
 
   unless File.exists?(account_path)
-    run %{ ssh-keygen -t rsa -b 4096 -C "#{email}" }
+    run %{ ssh-keygen -t rsa -b 4096 -f "#{account_path}" -C "#{email}" }
     eval "$(ssh-agent -s)"
     run %{ echo #{ssh_config} >> #{ssh_config_path} }
     run %{ ssh-add -K #{account_path} }
