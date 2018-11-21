@@ -15,6 +15,7 @@ let s:bundle_dir=expand("$HOME/.cache/dein")
 
 " ======== Python =========
 let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
 
 if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)

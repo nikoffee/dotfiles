@@ -20,15 +20,24 @@ task :install do
   install_iterm_theme
   setup_bundle_config
 
-  Rake::Task[:setup_ssh].execute
+  Rake::Task[:setup_work].execute
 
   exit_with_success
 end
 
-desc "Setup ssh"
+desc "Setup Work dev env"
+task :setup_work do
+  Rake::Task[:setup_ssh].execute
+end
+
+desc "Setup ssh for github"
 task :setup_ssh do
-  run %{ ssh-keygen -t rsa -b 4096 -C "greg@thisisfine.coffee" }
-  run %{ ssh-keygen -t rsa -b 4096 -C "greg.houle@shopify.com" }
+  run "mkdir -p ~/.ssh"
+  generate_ssh(account: "sorryeh", email: "greg.houle@shopify.com")
+  generate_ssh(account: "nikoffee", email: "greg@thisisfine.coffee")
+  run %{ ssh-add -l }
+
+  github_ssh_next_steps
 end
 
 task :install_private_fonts do
@@ -116,6 +125,37 @@ end
 task :default => :install
 
 private
+
+def generate_ssh(account:, email:)
+  raise ArgumentError("Missing `account` or `email`") unless account && email
+  ssh_path = File.expand_path(File.join("~", ".ssh"))
+  ssh_config_path = File.join(ssh_path, "config")
+  account_path = File.join(ssh_path, "id_rsa_#{account}")
+
+  ssh_config = <<~CONFIG
+    Host github.com-#{account}
+     AddKeysToAgent yes
+     UseKeychain yes
+     IdentityFile #{account_path}
+  CONFIG
+
+  unless File.exists?(account_path)
+    run %{ ssh-keygen -t rsa -b 4096 -C "#{email}" }
+    eval "$(ssh-agent -s)"
+    run %{ echo #{ssh_config} >> #{ssh_config_path} }
+    run %{ ssh-add -K #{account_path} }
+  end
+end
+
+def github_ssh_next_steps
+  puts ""
+  puts "==========================================="
+  puts "|                                         |"
+  puts "| Add the SSH key to your Github Accounts |"
+  puts "|                                         |"
+  puts "==========================================="
+  puts ""
+end
 
 def run(cmd)
   puts "[Execute] #{cmd}"
