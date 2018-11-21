@@ -170,7 +170,7 @@ def install_iterm_theme
 end
 
 def install_omz
-  if File.exists?(File.expand_path("$HOME/.oh-my-zsh"))
+  if File.exists?(File.expand_path("~/.oh-my-zsh"))
     upgrade_oh_my_zsh
   else
     run %{
@@ -183,11 +183,13 @@ def install_files(files, dir: '.', method: :symlink)
   files.each do |f|
     file = f.split('/').last
     source = "#{File.join(ROOT, f)}"
-    target = "#{File.expand_path(File.join("$HOME", dir, file))}"
+    target = "#{File.expand_path(File.join("~", dir, file))}"
 
     if File.exists?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
       puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
-      run %{ mv "$HOME/#{dir}#{file}" "$HOME/#{dir}#{file}.backup" }
+      run %{
+        mv "#{File.expand_path(File.join("~", dir, file))}" "#{File.expand_path(File.join("~", dir, "#{file}.backup"))}
+      }
     end
 
     if method == :symlink
@@ -205,7 +207,7 @@ def setup_neovim
   run "gem install --user-install neovim"
   run "npm install -g neovim"
 
-  FileUtils.mkdir_p(File.expand_path("$HOME/.config/nvim/")) unless File.exists?(File.expand_path("$HOME/.config/nvim"))
+  FileUtils.mkdir_p(File.expand_path("~/.config/nvim/")) unless File.exists?(File.expand_path("~/.config/nvim"))
 end
 
 def cask_install(app)
