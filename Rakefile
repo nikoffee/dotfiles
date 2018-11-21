@@ -13,8 +13,8 @@ task :install do
   setup_neovim
   Rake::Task[:install_private_fonts].execute
   Rake::Task[:install_dein].execute
-  Rake::Task[:link_dotfiles].execute
   Rake::Task[:install_omz].execute
+  Rake::Task[:link_dotfiles].execute
   install_fonts
   Rake::Task[:install_mac_apps].execute
   install_iterm_theme
