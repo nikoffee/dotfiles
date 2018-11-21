@@ -20,7 +20,15 @@ task :install do
   install_iterm_theme
   setup_bundle_config
 
+  Rake::Task[:setup_ssh].execute
+
   exit_with_success
+end
+
+desc "Setup ssh"
+task :setup_ssh do
+  run %{ ssh-keygen -t rsa -b 4096 -C "greg@thisisfine.coffee" }
+  run %{ ssh-keygen -t rsa -b 4096 -C "greg.houle@shopify.com" }
 end
 
 task :install_private_fonts do
