@@ -33,28 +33,31 @@ end
 
 desc "Setup Shopify dev"
 task :setup_dev do
-  run %{ eval "$(curl -sS https://dev.shopify.io/up)" }
-  run %{ dev clone onboarding-sandbox }
-  puts "\n\n==============================\n| do:                        |\n| $ dev cd onboarding-sandbox |\n| $ dev up                   |\n==============================\n\n"
-  puts "\n\nWant to setup Shopify core, which can be very long? (y/n)\n\n"
-  user = gets.chomp
-  unless user == 'n'
-    run %{ dev clone shopify }
-  end
+  sh %{ eval "$(curl -fsSL https://dev.shopify.io/up)" } unless File.exists?("/opt/dev")
+  puts "Call config set ssh.key ~/.ssh/id_rsa_sorryeh"
+  text = <<~TEXT
+    ==================================
+    | $ dev clone onboarding-sandbox |
+    | $ dev up                       |
+    | Visit:                         |
+    |   https://authme.shopify.io/   |
+    ==================================
+  TEXT
+  puts text
 end
 
 desc "Setup ssh for github"
 task :setup_ssh do
-  run "mkdir -p ~/.ssh"
+  sh "mkdir -p ~/.ssh"
   generate_ssh(account: "sorryeh", email: "greg.houle@shopify.com")
   generate_ssh(account: "nikoffee", email: "greg@thisisfine.coffee")
-  run %{ ssh-add -l }
+  sh %{ ssh-add -l }
 
   github_ssh_next_steps
 end
 
 task :install_private_fonts do
-  run %{
+  sh %{
     svn export --force --username=nikoffee https://github.com/nikoffee/paid_fonts/trunk/fonts/ #{File.join(ROOT, "fonts/")}
   }
 end
@@ -84,12 +87,12 @@ task :install_mac_apps do
   cask_install "slack"
   cask_install "google-chrome"
   cask_install "the-unarchiver"
-  run "mas install 540348655" # Monosnap
-  run "mas install 824183456" # affinity photo
-  run "mas install 638161122" # Yubikey
-  run "mas install 495945638" # Wake up time
-  run "mas install 736189492" # Notability
-  run "mas install 414030210" # Limechat
+  sh "mas install 540348655" # Monosnap
+  sh "mas install 824183456" # affinity photo
+  sh "mas install 638161122" # Yubikey
+  sh "mas install 495945638" # Wake up time
+  sh "mas install 736189492" # Notability
+  sh "mas install 414030210" # Limechat
   cask_install "omnigraffle"
   cask_install "kaleidoscope"
   cask_install "spectacle"
@@ -115,7 +118,7 @@ task :dein_migration do
   raise NotImplemented
 end
 
-desc "Runs the dein installer"
+desc "runs the dein installer"
 task :install_dein do
   puts "Installing and updating dein."
 
@@ -124,7 +127,7 @@ task :install_dein do
 
   unless File.exists?(File.join(dein_path, "installer.sh"))
     dein_installer_path = File.join(dein_path, "installer.sh")
-    run %{
+    sh %{
       curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > #{dein_installer_path}
       sh #{dein_installer_path} #{dein_path}
     }
@@ -153,10 +156,10 @@ def generate_ssh(account:, email:)
   CONFIG
 
   unless File.exists?(account_path)
-    run %{ ssh-keygen -t rsa -b 4096 -f "#{account_path}" -C "#{email}" }
-    run %{ eval "$(ssh-agent -s)" }
-    run %{ echo "#{ssh_config}" >> #{ssh_config_path} }
-    run %{ ssh-add -K "#{account_path}" }
+    sh %{ ssh-keygen -t rsa -b 4096 -f "#{account_path}" -C "#{email}" }
+    sh %{ eval "$(ssh-agent -s)" }
+    sh %{ echo "#{ssh_config}" >> #{ssh_config_path} }
+    sh %{ ssh-add -K "#{account_path}" }
   end
 end
 
@@ -168,11 +171,6 @@ def github_ssh_next_steps
   puts "|                                         |"
   puts "==========================================="
   puts ""
-end
-
-def run(cmd)
-  puts "[Execute] #{cmd}"
-  system "#{cmd}" unless ENV['DEBUG']
 end
 
 def exit_with_success
@@ -192,19 +190,21 @@ end
 def setup_bundle_config
   return unless system "which bundle"
 
-  bundler_jobs = (run "sysctl -n hw.ncpu").to_i - 1
-  run "bundle config --global jobs #{bundler_jobs}"
+  bundler_jobs = (sh "sysctl -n hw.ncpu").to_i - 1
+  sh "bundle config --global jobs #{bundler_jobs}"
 end
 
 def install_homebrew
-  unless run "which brew"
-    run %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
+  unless sh "which brew"
+    sh %{ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"}
   end
 
-  run "brew update"
+  sh "brew update"
 
-  run "brew install zsh python3 ruby mas haskell-stack zsh-syntax-highlighting postgresql neovim idris sqlite git openssl node"
+  sh "brew install ruby-install zsh python3 ruby mas haskell-stack zsh-syntax-highlighting postgresql neovim idris sqlite git openssl node"
   install_rustup
+
+  sh %{ ruby-install ruby }
 
   brewfile
 
@@ -213,29 +213,29 @@ end
 
 def brewfile
   brewfile = File.join(ROOT, "brew", "Brewfile")
-  run %{ brew bundle install --file=#{brewfile} }
+  sh %{ brew bundle install --file=#{brewfile} }
 end
 
 def install_rustup
-  run "curl https://sh.rustup.rs -sSf | sh"
+  sh "curl https://sh.rustup.rs -sSf | sh"
 end
 
 def install_fonts
-  run "cp -f #{File.join(ROOT, "fonts", "/*")} $HOME/Library/Fonts"
+  sh "cp -f #{File.join(ROOT, "fonts", "/*")} $HOME/Library/Fonts"
 end
 
 def install_iterm_theme
   iterm_plist_path = File.join(ROOT, "iterm", "com.googlecode.iterm2.plist")
   return unless File.exists?(iterm_plist_path)
-  run %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
-  run %{ defaults read com.googlecode.iterm2 }
+  sh %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
+  sh %{ defaults read com.googlecode.iterm2 }
 end
 
 def install_omz
   if File.exists?(File.expand_path("~/.oh-my-zsh"))
-    run "upgrade_oh_my_zsh"
+    sh "upgrade_oh_my_zsh"
   else
-    run %{
+    sh %{
       curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     }
   end
@@ -251,35 +251,35 @@ def install_files(files, dir: '', method: :symlink)
 
     if File.exists?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
       puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
-      run %{
+      sh %{
         mv "#{File.expand_path(File.join("~", dir, file))}" "#{File.expand_path(File.join("~", dir, "#{file}.backup"))}
       }
     end
 
     if method == :symlink
-      run %{ ln -nfs "#{source}" "#{target}" }
+      sh %{ ln -nfs "#{source}" "#{target}" }
     else
-      run %{ cp -f "#{source}" "#{target}" }
+      sh %{ cp -f "#{source}" "#{target}" }
     end
   end
 end
 
 def setup_neovim
-  run "pip install neovim"
-  run "pip3 install --user neovim"
-  run "pip3 install neovim"
-  run "gem install --user-install neovim"
-  run "npm install -g neovim"
+  sh "pip install neovim"
+  sh "pip3 install --user neovim"
+  sh "pip3 install neovim"
+  sh "gem install --user-install neovim"
+  sh "npm install -g neovim"
 
   FileUtils.mkdir_p(File.expand_path("~/.config/nvim/")) unless File.exists?(File.expand_path("~/.config/nvim"))
 end
 
 def cask_install(app)
-  run %{ brew cask install #{app} }
+  sh %{ brew cask install #{app} }
 end
 
 def cask_upgrade
-  run %{
+  sh %{
     brew cask doctor
     brew cask upgrade
   }
