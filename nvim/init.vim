@@ -20,7 +20,7 @@ let g:python_host_prog = '/usr/local/bin/python2'
 if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)
 
-  call dein#add(s:bundle_dir . '/Shougo/dein.vim')
+  call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/denite.nvim')
