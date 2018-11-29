@@ -61,11 +61,7 @@ git_clean_merged_branches() {
   git branch --merged master --no-color | grep -v '^* master$' | xargs -n1 git branch -d
 }
 
-# Aliases
-if type bundle > /dev/null 2>&1; then
-  alias be="bundle exec"
-fi
-
+alias be="bundle exec"
 alias ll="ls -AahloPS"
 
 # Networking Proxy Commands

@@ -1,8 +1,11 @@
+#[include]
+#  path = "/Users/greg/.home.gitconfig"
+#[includeIf "gitdir/i:/opt/dev/**"]
+#  path = "/Users/greg/.work.gitconfig"
+#[includeIf "gitdir/i:~/src/github.com/Shopify/**"]
+#  path = "/Users/greg/.work.gitconfig"
 [include]
-  path = "/Users/greg/.home.gitconfig"
-[includeIf "gitdir/i:~/src/github.com/Shopify/**"]
   path = "/Users/greg/.work.gitconfig"
-
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustexitcode = true
