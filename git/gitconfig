@@ -6,6 +6,7 @@
   path = "/Users/greg/.work.gitconfig"
 #[include]
 #  path = "/Users/greg/.work.gitconfig"
+
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustexitcode = true
