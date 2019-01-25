@@ -3,5 +3,5 @@
   email = greg.houle@shopify.com
 [github]
   user = sorryeh
-[core]
-  sshCommand = "ssh -i ~/.ssh/id_rsa_sorryeh -F /dev/null"
+#[core]
+#  sshCommand = "ssh -i ~/.ssh/id_rsa_sorryeh -F /dev/null"
