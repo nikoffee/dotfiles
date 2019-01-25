@@ -15,6 +15,7 @@ task :install do
   Rake::Task[:install_dein].execute
   Rake::Task[:link_dotfiles].execute
   Rake::Task[:install_omz].execute
+  Rake::Task[:setup_powerline].execute
   install_fonts
   Rake::Task[:install_mac_apps].execute
   install_iterm_theme
@@ -132,6 +133,16 @@ task :install_dein do
       sh #{dein_installer_path} #{dein_path}
     }
   end
+end
+
+desc "Setup Powerline for oh-my-zsh"
+task :setup_powerline do
+  sh %{
+    brew tap sambadevi/powerlevel9k
+    brew install powerlevel9k
+    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    echo "ZSH_THEME=\"powerlevel9k/powerlevel9k\"" >> ~/.zshrc
+  }
 end
 
 desc "Setup a dark theme for slack"
