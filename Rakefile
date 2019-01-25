@@ -148,18 +148,26 @@ def generate_ssh(account:, email:)
   ssh_config_path = File.join(ssh_path, "config")
   account_path = File.join(ssh_path, "id_rsa_#{account}")
 
-  ssh_config = <<~CONFIG
-    Host github.com-#{account}
-     AddKeysToAgent yes
-     UseKeychain yes
-     IdentityFile #{account_path}
-  CONFIG
+  ssh_config = if account == "sorryeh"
+    <<~CONFIG
+    Host github.com
+      HostName github.com
+      User git
+      IdentityFile #{account_path}
+    CONFIG
+  else
+    <<~CONFIG
+    Host #{account}.github.com
+      HostName github.com
+      User git
+      IdentityFile #{account_path}
+    CONFIG
+  end
 
   unless File.exists?(account_path)
     sh %{ ssh-keygen -t rsa -b 4096 -f "#{account_path}" -C "#{email}" }
     sh %{ eval "$(ssh-agent -s)" }
     sh %{ echo "#{ssh_config}" >> #{ssh_config_path} }
-    sh %{ ssh-add -K "#{account_path}" }
   end
 end
 
