@@ -49,8 +49,8 @@ end
 desc "Setup ssh for github"
 task :setup_ssh do
   sh "mkdir -p ~/.ssh"
-  generate_ssh(account: "sorryeh", email: "greg.houle@shopify.com")
   generate_ssh(account: "nikoffee", email: "greg@thisisfine.coffee")
+  generate_ssh(account: "sorryeh", email: "greg.houle@shopify.com")
   sh %{ ssh-add -l }
 
   github_ssh_next_steps
