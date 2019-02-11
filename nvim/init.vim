@@ -37,7 +37,10 @@ if dein#load_state(s:bundle_dir)
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
   call dein#add('vim-airline/vim-airline-themes') " themes from airline
+
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
+  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
+
   call dein#add('airblade/vim-gitgutter')
   call dein#add('majutsushi/tagbar') " project structure via tags
   call dein#add('tpope/vim-fugitive') " needed for airline branch
@@ -147,7 +150,7 @@ map <Leader>] :bnext<CR>
 let g:neomake_open_list = 2
 let g:neomake_list_height = 15
 let g:neomake_verbose = 0 " default is 1
-call neomake#configure#automake('nw', 500)
+call neomake#configure#automake('nw', 1000)
 
 " ====== Airline ======
 
@@ -265,6 +268,13 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15'
+let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+
+" ======= CPSM options for CTRLP ========
+let g:cpsm_match_empty_query = 0
+let g:cpsm_highlight_mode = "detailed"
 
 """" ==== DestroyAllSoftware
 " type current dir path
@@ -355,3 +365,12 @@ set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
+
+
+" Auto reload nvim configs on change
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup nvim_init     " Source nvim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif

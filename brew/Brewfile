@@ -104,6 +104,7 @@ brew "wine"
 brew "winetricks"
 brew "yarn"
 brew "zlib"
+brew "fd"
 brew "zsh", args: ["with-gdbm", "with-pcre"]
 brew "zsh-syntax-highlighting"
 brew "burntsushi/ripgrep/ripgrep-bin"
