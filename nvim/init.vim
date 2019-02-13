@@ -10,6 +10,8 @@ else
   let s:editor_root = expand("$HOME/.vim")
 endif
 
+let g:ale_completion_enabled = 1
+
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 let s:bundle_dir=expand("$HOME/.cache/dein")
 
@@ -25,6 +27,8 @@ if dein#load_state(s:bundle_dir)
   call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/echodoc.vim')
+
+  call dein#add('junegunn/fzf')
 
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
   call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
@@ -323,15 +327,6 @@ set tabstop=2
 set expandtab
 set nofoldenable
 
-"autocmd BufWinEnter quickfix nnoremap <silent> <buffer>
-            "\   q :cclose<cr>:lclose<cr>
-"autocmd BufEnter * if (winnr('$') == 1 && &buftype ==# 'quickfix' ) |
-            "\   bd|
-            "\   q | endif
-
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Auto reload nvim configs on change
 if has ('autocmd') " Remain compatible with earlier versions
@@ -345,6 +340,7 @@ endif
 " ALE
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set completeopt=menu,menuone,preview,noselect,noinsert
 
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -363,17 +359,19 @@ let g:ale_fixers = {
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_close_preview_on_insert = 1
-let g:ale_completion_enabled = 1
+" let g:ale_completion_enabled = 1
 let g:ale_ruby_solargraph_executable = 'solargraph'
 let g:ale_cursor_detail = 1
 let g:ale_fix_on_save = 1
 let g:ale_enabled = 1
 
+inoremap <silent> <C-Space> <C-\><C-O>:AleComplete<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""
 " LanguageClient-neovim
 """"""""""""""""""""""""""""""""""""""""""""
 let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['tcp://localhost:7658'],
+    \ 'ruby': ['solargraph', 'stdio'],
     \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
     \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
     \ }
