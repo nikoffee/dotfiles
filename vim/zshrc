@@ -54,12 +54,11 @@ fi
 
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="/usr/local/bin:$PATH"
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:$PATH"
 export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
 ZSH_THEME=powerlevel9k/powerlevel9k
 
+export PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 alias pip="pip3"

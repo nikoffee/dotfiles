@@ -14,8 +14,9 @@ set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 let s:bundle_dir=expand("$HOME/.cache/dein")
 
 " ======== Python =========
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 let g:loaded_python_provider = 1
+let g:ruby_host_prog = '/usr/local/bin/ruby'
 
 if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)
@@ -254,13 +255,13 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15'
-let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:ctrlp_use_caching = 0
 let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
 
 " ======= CPSM options for CTRLP ========
-let g:cpsm_match_empty_query = 0
-let g:cpsm_highlight_mode = "detailed"
+" let g:cpsm_match_empty_query = 0
+" let g:cpsm_highlight_mode = "detailed"
 
 """" ==== DestroyAllSoftware
 " type current dir path
