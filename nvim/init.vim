@@ -16,6 +16,7 @@ let s:bundle_dir=expand("$HOME/.cache/dein")
 " ======== Python =========
 let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 let g:loaded_python_provider = 1
+let g:python2_host_prog = '/usr/local/opt/python@2/bin/python'
 let g:ruby_host_prog = '/usr/local/bin/ruby'
 
 if dein#load_state(s:bundle_dir)
@@ -23,7 +24,6 @@ if dein#load_state(s:bundle_dir)
 
   call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
-  call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
 
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
@@ -31,10 +31,7 @@ if dein#load_state(s:bundle_dir)
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
 
   call dein#add('w0rp/ale') " Async Lint Engine
-  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
-  call dein#add('ncm2/ncm2')
-  call dein#add('ncm2/ncm2-gtags')
-  call dein#add('ncm2/ncm2-syntax')
+  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' })
 
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
@@ -51,20 +48,9 @@ if dein#load_state(s:bundle_dir)
   call dein#add('tpope/vim-fugitive') " needed for airline branch
   call dein#add('mhinz/vim-grepper')
 
-  call dein#add('janko-m/vim-test')
-  call dein#add('skywind3000/asyncrun.vim') " run your tests inside nvim
-
-  call dein#add('tpope/vim-dispatch')
-
-  call dein#add('tpope/vim-rails')
-  call dein#add('tpope/vim-bundler')
-
-  call dein#add('bling/vim-bufferline')
-
+  call dein#add('bling/vim-bufferline') " show buffers open in airline
   call dein#add('rizzatti/dash.vim') " dash integration
-
   call dein#add('rust-lang/rust.vim') " rust integration
-
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
   call dein#end()
   call dein#save_state()
@@ -138,6 +124,7 @@ autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent noc
 nnoremap Q @q
 let mapleader=";"
 
+" Copy visual selection, Paste
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_
 nnoremap <leader>y "+y
@@ -210,37 +197,32 @@ let g:tagbar_type_rust = {
   \]
 \}
 
-
 " ===== Ruby ======
 let ruby_fold = 1
 
 " ====== Rust ========
 let g:rustfmt_autosave = 1
-let g:deoplete#sources#rust#racer_binary=expand('$HOME/.cargo/bin/racer')
-let g:deoplete#sources#rust#rust_source_path=expand('$HOME/src/github.com/rust/src')
-let g:deoplete#sources#rust#show_duplicates=1
-let g:deoplete#sources#rust#documentation_max_height=20
 
 " ===== Grepper ======
-nnoremap <leader>g :Grepper -tool rg<cr>
-nnoremap <leader>G :Grepper -tool rg -buffers<cr>
+cnoremap <c-n> <down>
+cnoremap <c-p> <up>
+
+nnoremap <leader>g :Grepper <cr>
+nnoremap <leader>G :Grepper -tool ag -cword -noprompt<cr>
 nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
-let g:grepper               = {}
-let g:grepper.tools         = ['rg', 'git', 'ag']
-let g:grepper.jump          = 1
-let g:grepper.next_tool     = '<leader>g'
-let g:grepper.simple_prompt = 1
-let g:grepper.quickfix      = 1
-
-" ====== Async Run test ======
-let g:asyncrun_mode = 0
-let g:asyncrun_rootmarks = ['.git', '.root', '.bzr', '_darcs', 'build.xml']
-let test#strategy = "asyncrun"
-let g:asyncrun_open = 12
-nmap <silent><leader>t :TestNearest<CR>
-nmap <silent><leader>T :TestFile<CR>
+let g:grepper               = {
+      \ 'tools': ['rg', 'git', 'ag'],
+      \ 'jump': 1,
+      \ 'highlight': 1,
+      \ 'dir': 'repo,file',
+      \ 'next_tool': '<leader>g',
+      \ 'simple_prompt': 1,
+      \ 'qickfix': 1,
+      \ 'stop': 2000,
+      \}
+"let command! Todo Grepper -tool git -query -E '(TODO|FIXME|XXX):'
 
 " ======= Dash App bindings =========
 :nmap <silent> <leader>d <Plug>DashSearch
@@ -348,7 +330,6 @@ set nofoldenable
             "\   q | endif
 
 set completeopt=noinsert,menuone,noselect
-"autocmd BufEnter * call ncm2#enable_for_buffer()
 set shortmess+=c
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
