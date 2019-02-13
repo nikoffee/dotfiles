@@ -373,7 +373,7 @@ endif
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint', 'prettier', 'tsserver'],
-\   'ruby': ['brakeman', 'rubocop', 'solargraph'],
+\   'ruby': ['rubocop', 'solargraph'],
 \   'rust': ['rustfmt'],
 \   'coffeescript': ['coffee', 'coffeelint'],
 \   'erb': ['erb', 'erubi'],
