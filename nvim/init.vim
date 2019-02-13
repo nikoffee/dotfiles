@@ -388,6 +388,7 @@ let g:ale_fixers = {
 let g:airline#extensions#ale#enabled = 1
 let g:ale_close_preview_on_insert = 1
 let g:ale_completion_enabled = 1
+let g:ale_ruby_solargraph_executable = 'solargraph'
 let g:ale_cursor_detail = 1
 let g:ale_fix_on_save = 1
 let g:ale_enabled = 1
