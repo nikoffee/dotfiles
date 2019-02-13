@@ -25,8 +25,6 @@ COMPLETION_WAITING_DOTS="true"
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
-# export SSH_KEY_PATH="$HOME/.ssh/rsa_id_nikoffee"
-#export PYTHON_PATH="/usr/local/lib/python$(python3 -V | grep -Eo "\d{1}\.\d{1}")/site-packages:/usr/local/lib/python2.7/site-packages:$PYTHON_PATH"
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig
 
 plugins=(brew colorize cp history sudo web-search pip zsh-syntax-highlighting forklift osx python rsync screen tmux gnu-utils colored-man-pages mosh zsh-autosuggestions git powerline)
@@ -48,7 +46,46 @@ if [ -f "$HOME/.profile" ]; then
   source "$HOME/.profile"
 fi
 
-# ------ Functions -------
+export SHOPIFY_HOME=$HOME/src/github.com/Shopify
+
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="/usr/local/bin:$PATH"
+
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:$PATH"
+export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
+ZSH_THEME=powerlevel9k/powerlevel9k
+
+# pip zsh completion start
+function _pip_completion {
+  local words cword
+  read -Ac words
+  read -cn cword
+  reply=( $( COMP_WORDS="$words[*]" \
+             COMP_CWORD=$(( cword-1 )) \
+             PIP_AUTO_COMPLETE=1 $words[1] ) )
+}
+compctl -K _pip_completion pip
+# pip zsh completion end
+
+
+
+
+
+############################
+#######################
+###################
+#
+# ------ Functions  & Aliases -------
+#
+###################
+######################
+############################
+
 brewit() {
   echo -e "\e[93mNow Updating brew..\e[0m"
   brew update
@@ -107,21 +144,3 @@ dns_google() {
 reset_touchbar() {
 killall ControlStrip
 }
-
-export SHOPIFY_HOME=$HOME/src/github.com/Shopify
-
-#if which ruby >/dev/null && which gem >/dev/null; then
-#    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-#fi
-
-autoload -U +X compinit && compinit
-autoload -U +X bashcompinit && bashcompinit
-eval "$(stack --bash-completion-script stack)"
-
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="/usr/local/bin:$PATH"
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:$PATH"
-export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
-ZSH_THEME=powerlevel9k/powerlevel9k

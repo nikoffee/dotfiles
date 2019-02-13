@@ -21,7 +21,6 @@ if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)
 
   call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/echodoc.vim')
@@ -31,32 +30,39 @@ if dein#load_state(s:bundle_dir)
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
 
   call dein#add('w0rp/ale') " Async Lint Engine
+  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' })
+  call dein#add('ncm2/ncm2')
+  call dein#add('ncm2/ncm2-gtags')
+  call dein#add('ncm2/ncm2-syntax')
+
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
+
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
   call dein#add('vim-airline/vim-airline-themes') " themes from airline
 
+  call dein#add('brooth/far.vim') " search replace utility
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
-  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
+"  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
 
   call dein#add('airblade/vim-gitgutter')
   call dein#add('majutsushi/tagbar') " project structure via tags
   call dein#add('tpope/vim-fugitive') " needed for airline branch
-  call dein#add('brooth/far.vim') " search replace utility
   call dein#add('mhinz/vim-grepper')
+
   call dein#add('janko-m/vim-test')
   call dein#add('skywind3000/asyncrun.vim') " run your tests inside nvim
+
   call dein#add('tpope/vim-dispatch')
+
   call dein#add('tpope/vim-rails')
   call dein#add('tpope/vim-bundler')
+
   call dein#add('bling/vim-bufferline')
+
   call dein#add('rizzatti/dash.vim') " dash integration
+
   call dein#add('rust-lang/rust.vim') " rust integration
-  call dein#add('sebastianmarkow/deoplete-rust') " rust completion
-  call dein#add('ncm2/ncm2')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('ncm2/ncm2-gtags')
-  call dein#add('ncm2/ncm2-syntax')
 
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
   call dein#end()
@@ -169,18 +175,6 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 
 colorscheme OceanicNext
-
-" ===== Deoplete =====
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#tag#cache_limit_size = 20000000
-let g:deoplete#max_list = 30
-let g:deoplete#enable_refresh_always = 1
-let g:deoplete#auto_complete_delay = 75
-let g:deoplete#auto_refresh_delay = 350
-
-let g:deoplete#sources = {}
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000
@@ -392,3 +386,22 @@ let g:ale_ruby_solargraph_executable = 'solargraph'
 let g:ale_cursor_detail = 1
 let g:ale_fix_on_save = 1
 let g:ale_enabled = 1
+
+""""""""""""""""""""""""""""""""""""""""""""
+" LanguageClient-neovim
+""""""""""""""""""""""""""""""""""""""""""""
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['tcp://localhost:7658'],
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+    \ }
+
+" Stop restarting Solargraph when restarting neovim
+" let g:LanguageClient_autoStop = 0
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
