@@ -30,9 +30,7 @@ if dein#load_state(s:bundle_dir)
   call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
 
-  call dein#add('neomake/neomake') " asynchronous syntastic, make per filetype
-
-  "call dein#add('w0rp/ale') " Async Lint Engine
+  call dein#add('w0rp/ale') " Async Lint Engine
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
@@ -59,7 +57,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('roxma/nvim-yarp')
   call dein#add('ncm2/ncm2-gtags')
   call dein#add('ncm2/ncm2-syntax')
-  call dein#add('critiqjo/lldb.nvim')
 
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
   call dein#end()
@@ -125,7 +122,9 @@ set scrolloff=5
 set sidescrolloff=15
 set sidescroll=5
 
-autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set expandtab ai sw=2 sts=2 et
+silent! helptags ALL
+
+autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set expandtab ai smartindent sw=2 sts=2 et
 autocmd FileType python set sw=4 sts=4 et
 autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
 
@@ -145,13 +144,6 @@ vnoremap <leader>P "+P
 map <Leader>[ :bprevious<CR>
 map <Leader>] :bnext<CR>
 
-" ===== Neomake ======
-" autocmd! BufWritePost,BufEnter * Neomake
-let g:neomake_open_list = 2
-let g:neomake_list_height = 15
-let g:neomake_verbose = 0 " default is 1
-call neomake#configure#automake('nw', 1000)
-
 " ====== Airline ======
 
 let g:airline#extensions#tabline#enabled = 1
@@ -168,7 +160,7 @@ let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mi
 
 let g:airline#extensions#whitespace#show_message = 1
 
-let g:airline#extensions#neomake#enabled = 1
+" let g:airline#extensions#neomake#enabled = 1
 
 " ====== Looks and FEELS =======
 " let g:airline_theme='luna'
@@ -365,8 +357,6 @@ set completeopt=noinsert,menuone,noselect
 set shortmess+=c
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-
-
 " Auto reload nvim configs on change
 if has ('autocmd') " Remain compatible with earlier versions
  augroup nvim_init     " Source nvim configuration upon save
@@ -374,3 +364,30 @@ if has ('autocmd') " Remain compatible with earlier versions
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ALE
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier', 'tsserver'],
+\   'ruby': ['brakeman', 'rubocop', 'solargraph'],
+\   'rust': ['rustfmt'],
+\   'coffeescript': ['coffee', 'coffeelint'],
+\   'erb': ['erb', 'erubi'],
+\   'graphql': ['eslint', 'gqlint', 'prettier'],
+\   'html': ['prettier'],
+\   'idris': ['idris'],
+\   'json': ['prettier'],
+\   'markdown': ['prettier'],
+\   'yaml': ['prettier'],
+\}
+
+let g:airline#extensions#ale#enabled = 1
+let g:ale_close_preview_on_insert = 1
+let g:ale_completion_enabled = 1
+let g:ale_cursor_detail = 1
+let g:ale_fix_on_save = 1
+let g:ale_enabled = 1
