@@ -21,6 +21,9 @@ POWERLEVEL9K_TIME_BACKGROUND='white'
 # Finished
 #########################
 
+# 10 second wait before delete everything.
+setopt RM_STAR_WAIT
+
 COMPLETION_WAITING_DOTS="true"
 
 export ZSH=$HOME/.oh-my-zsh
@@ -37,6 +40,7 @@ ssh-add -A
 
 export GREP_OPTIONS='--color=auto'
 export EDITOR="nvim"
+export GIT_EDITOR="nvim"
 
 if [ -f "$HOME/.bashrc" ]; then
   source "$HOME/.bashrc"
@@ -58,7 +62,7 @@ export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/l
 export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
 ZSH_THEME=powerlevel9k/powerlevel9k
 
-export PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
+#export PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 alias pip="pip3"
@@ -74,6 +78,13 @@ function _pip_completion {
 compctl -K _pip_completion pip3
 # pip zsh completion end
 
+# kubectl autocomplete
+if [ $commands[kubectl] ]; then
+  source <(kubectl completion zsh)
+fi
+
+#Neovim true color support
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 
 ############################

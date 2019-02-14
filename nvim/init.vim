@@ -49,6 +49,7 @@ if dein#load_state(s:bundle_dir)
   call dein#add('airblade/vim-gitgutter')
   call dein#add('majutsushi/tagbar') " project structure via tags
   call dein#add('tpope/vim-fugitive') " needed for airline branch
+  call dein#add('tpope/vim-endwise') " ruby end autocompletion
   call dein#add('mhinz/vim-grepper')
 
   call dein#add('bling/vim-bufferline') " show buffers open in airline
@@ -369,6 +370,11 @@ let g:ale_fixers = {
 \   'yaml': ['prettier'],
 \}
 
+let g:ale_linters = {
+      \ 'ruby': ['rubocop', 'solargraph'],
+      \ 'javascript': ['eslint'],
+      \}
+
 let g:airline#extensions#ale#enabled = 1
 let g:ale_close_preview_on_insert = 1
 let g:ale_completion_enabled = 1
@@ -376,6 +382,7 @@ let g:ale_ruby_solargraph_executable = 'solargraph'
 let g:ale_ruby_rubocop_executable = 'rubocop'
 let g:ale_cursor_detail = 1
 let g:ale_fix_on_save = 1
+let g:ale_list_vertical = 1
 let g:ale_enabled = 1
 
 inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
