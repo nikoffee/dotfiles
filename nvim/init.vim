@@ -10,8 +10,6 @@ else
   let s:editor_root = expand("$HOME/.vim")
 endif
 
-let g:ale_completion_enabled = 1
-
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 let s:bundle_dir=expand("$HOME/.cache/dein")
 
@@ -25,6 +23,7 @@ if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)
 
   call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
+  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/echodoc.vim')
 
@@ -35,7 +34,7 @@ if dein#load_state(s:bundle_dir)
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
 
   call dein#add('w0rp/ale') " Async Lint Engine
-  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' })
+"  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' })
 
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
@@ -336,6 +335,19 @@ if has ('autocmd') " Remain compatible with earlier versions
   augroup END
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""
+" OMNIFUNC
+"""""""""""""""""""""""""""""""""""""""""""
+
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+augroup end
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE
 "
@@ -359,29 +371,43 @@ let g:ale_fixers = {
 
 let g:airline#extensions#ale#enabled = 1
 let g:ale_close_preview_on_insert = 1
-" let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 1
 let g:ale_ruby_solargraph_executable = 'solargraph'
+let g:ale_ruby_rubocop_executable = 'rubocop'
 let g:ale_cursor_detail = 1
 let g:ale_fix_on_save = 1
 let g:ale_enabled = 1
 
-inoremap <silent> <C-Space> <C-\><C-O>:AleComplete<CR>
+inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
+
+""""""""""""""""""""""""""""
+"" Deoplete
+""""""""""""""""""""""""""
+
+let g:deoplete#enable_at_startup = 1
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+let g:deoplete#keyword_patterns = {}
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+
+
 
 """"""""""""""""""""""""""""""""""""""""""""
 " LanguageClient-neovim
 """"""""""""""""""""""""""""""""""""""""""""
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-    \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
-    \ }
+" let g:LanguageClient_serverCommands = {
+"    \ 'ruby': ['solargraph', 'stdio'],
+"    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+"    \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
+"    \ }
 
 " Stop restarting Solargraph when restarting neovim
 " let g:LanguageClient_autoStop = 0
 
 " Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" let g:LanguageClient_autoStart = 1
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
