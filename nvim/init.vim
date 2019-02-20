@@ -17,7 +17,6 @@ let s:bundle_dir=expand("$HOME/.cache/dein")
 let g:python3_host_prog = '/usr/local/opt/python/libexec/bin/python'
 let g:loaded_python_provider = 1
 let g:python2_host_prog = '/usr/local/opt/python@2/bin/python'
-let g:ruby_host_prog = '/usr/local/bin/ruby'
 
 if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)

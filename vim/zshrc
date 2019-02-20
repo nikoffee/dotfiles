@@ -86,6 +86,10 @@ fi
 #Neovim true color support
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+# Env Management w/ Shadowenv
+eval "$(shadowenv init zsh)"
+
+export GOPATH=$HOME
 
 ############################
 #######################
