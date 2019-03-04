@@ -237,12 +237,18 @@ let g:far#source = 'agnvim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " ======== CtrlP options =======
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_user_command = {
+      \'types': {
+        \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
+        \},
+      \ 'fallback': 'fd --type f --color=never "" %s',
+      \}
 let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15'
+let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:30'
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = 'fd --type f --color=never "" %s'
+let g:ctrlp_lazy_update = 25
+let g:ctrlp_working_path_mode = 'ra'
 
 " ======= CPSM options for CTRLP ========
 " let g:cpsm_match_empty_query = 0
