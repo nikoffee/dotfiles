@@ -1,7 +1,7 @@
 [user]
   name = Greg Houle
   email = greg.houle@shopify.com
-[github]
-  user = sorryeh
+[credential]
+  username = sorryeh
 #[core]
 #  sshCommand = "ssh -i ~/.ssh/id_rsa_sorryeh -F /dev/null"

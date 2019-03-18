@@ -74,19 +74,3 @@
   recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
 [credential]
 	helper = osxkeychain
-[http "https://git-mirror.shopifycloud.com"]
-	cookieFile = /tmp/galaxy.cookies
-	saveCookies = true
-[url "https://git-mirror.shopifycloud.com/Shopify/"]
-	insteadOf = https://github.com/Shopify/
-	insteadOf = git@github.com:Shopify/
-	insteadOf = https://github.com/shopify/
-	insteadOf = git@github.com:shopify/
-[url "https://github.com/Shopify/"]
-	pushInsteadOf = https://github.com/Shopify/
-[url "https://github.com/shopify/"]
-	pushInsteadOf = https://github.com/shopify/
-[url "git@github.com:Shopify/"]
-	pushInsteadOf = git@github.com:Shopify/
-[url "git@github.com:shopify/"]
-	pushInsteadOf = git@github.com:shopify/

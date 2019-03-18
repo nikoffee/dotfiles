@@ -247,7 +247,6 @@ let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
 let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:30'
 " let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
 let g:ctrlp_use_caching = 0
-let g:ctrlp_lazy_update = 25
 let g:ctrlp_working_path_mode = 'ra'
 
 " ======= CPSM options for CTRLP ========
