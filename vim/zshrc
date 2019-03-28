@@ -64,6 +64,8 @@ ZSH_THEME=powerlevel9k/powerlevel9k
 
 #export PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export GOPATH=$HOME
+export PATH=$GOPATH/bin:$PATH
 
 alias pip="pip3"
 # pip zsh completion start
@@ -88,8 +90,6 @@ export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # Env Management w/ Shadowenv
 eval "$(shadowenv init zsh)"
-
-export GOPATH=$HOME
 
 ############################
 #######################

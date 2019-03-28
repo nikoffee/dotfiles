@@ -263,6 +263,10 @@ set winheight=5
 set winminheight=5
 set winheight=30
 
+" Delete buffer without losing split windows (move previous buffer and delete
+" buffer)
+nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+
 " Show Rails Routes
 function! ShowRoutes()
   " Requires 'scratch' plugin
