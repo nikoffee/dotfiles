@@ -138,6 +138,7 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+" Previous or Next buffer (move around)
 map <Leader>[ :bprevious<CR>
 map <Leader>] :bnext<CR>
 
@@ -263,9 +264,11 @@ set winheight=5
 set winminheight=5
 set winheight=30
 
-" Delete buffer without losing split windows (move previous buffer and delete
-" buffer)
-nnoremap <silent> <leader>q :lclose<bar>b#<bar>bd #<CR>
+" Only Delete Buffer, keep layout.
+function! DeleteBufferKeepLayout()
+  :lclose<bar>b#<bar>bd #<CR>
+endfunction
+nnoremap <silent> <leader>q :call DeleteBufferKeepLayout()<CR>
 
 " Show Rails Routes
 function! ShowRoutes()
