@@ -1,11 +1,7 @@
 [include]
+  path = "/Users/greg/.work.gitconfig"
+[includeIf "gitdir/i:~/src/github.com/nikoffee/**"]
   path = "/Users/greg/.home.gitconfig"
-[includeIf "gitdir/i:/opt/dev/**"]
-  path = "/Users/greg/.work.gitconfig"
-[includeIf "gitdir/i:~/src/github.com/Shopify/**"]
-  path = "/Users/greg/.work.gitconfig"
-#[include]
-#  path = "/Users/greg/.work.gitconfig"
 
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
@@ -60,12 +56,14 @@
   b = branch -av
   f = fetch
   unstage = reset HEAD --
-  last = log -1 HEAD
+  last = log -1 -p HEAD
   ls = log --full-diff -p
   l = log
   prune = fetch --prune
   undo = reset --soft HEAD^
+  u = undo
   stash-all = stash save --include-untracked
+  sa = stash-all
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
   churn = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
