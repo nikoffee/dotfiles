@@ -30,7 +30,7 @@ export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig
 
-plugins=(brew colorize cp history sudo web-search pip zsh-syntax-highlighting forklift osx python rsync screen tmux gnu-utils colored-man-pages mosh zsh-autosuggestions git powerline)
+plugins=(brew colorize cp history sudo web-search pip zsh-syntax-highlighting forklift osx python rsync screen tmux gnu-utils colored-man mosh zsh-autosuggestions git powerline)
 
 if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
   source /opt/dev/dev.sh
