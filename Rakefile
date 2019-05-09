@@ -72,6 +72,7 @@ task :link_dotfiles do
   install_files Dir.glob("vim/*")
   install_files Dir.glob("python/*")
   install_files Dir.glob("sh/*")
+  install_files Dir.glob("zsh/*")
 end
 
 task :install_omz do
@@ -258,7 +259,7 @@ def install_omz
       curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
     }
   end
-  install_files Dir.glob("vim/zshrc")
+  install_files Dir.glob("zsh/*")
 end
 
 def install_files(files, dir: '', method: :symlink)

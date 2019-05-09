@@ -25,7 +25,7 @@ POWERLEVEL9K_TIME_BACKGROUND='white'
 setopt RM_STAR_WAIT
 
 COMPLETION_WAITING_DOTS="true"
-plugins=(brew colored-man-pages colorize cp history sudo web-search pip forklift osx python rsync screen tmux gnu-utils mosh git zsh-syntax-highlighting)
+plugins=(brew colored-man-pages colorize cp history sudo web-search pip forklift osx python rsync screen tmux gnu-utils mosh git)
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
