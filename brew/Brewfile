@@ -4,22 +4,22 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/core"
 tap "homebrew/services"
+tap "sambadevi/powerlevel9k"
 tap "shopify/shopify"
 tap "universal-ctags/universal-ctags"
-cask "java"
 brew "apr"
 brew "openssl"
 brew "apr-util"
 brew "autoconf"
 brew "automake"
 brew "bison"
+brew "boost"
 brew "brew-cask-completion"
 brew "ghc"
 brew "cabal-install"
 brew "libpng"
 brew "freetype"
 brew "fontconfig"
-brew "gettext"
 brew "libffi"
 brew "glib"
 brew "cloc", args: ["HEAD"]
@@ -29,14 +29,16 @@ brew "libusb", args: ["HEAD"]
 brew "dfu-util", args: ["HEAD"]
 brew "docbook"
 brew "docbook-xsl"
-brew "doxygen", args: ["HEAD"]
+brew "doxygen"
 brew "editorconfig", args: ["HEAD"]
+brew "fd"
 brew "gdbm"
 brew "jpeg"
 brew "libtiff"
-brew "readline"
+brew "readline", link: true
 brew "sqlite"
 brew "fontforge"
+brew "fzf"
 brew "webp", args: ["HEAD"]
 brew "gengetopt"
 brew "git"
@@ -48,12 +50,9 @@ brew "libksba"
 brew "gnupg"
 brew "graphviz"
 brew "haskell-stack"
-brew "node"
-brew "heroku"
 brew "python"
 brew "httpie"
 brew "idris"
-brew "libxml2", args: ["HEAD"], link: true
 brew "imagemagick", args: ["HEAD"], link: false
 brew "imagemagick@6"
 brew "jq"
@@ -67,24 +66,21 @@ brew "libevent"
 brew "libgda"
 brew "libgraphqlparser"
 brew "libidn2"
-brew "libssh2", args: ["HEAD"]
-brew "libuv"
+brew "libxml2", args: ["HEAD"]
 brew "libyaml"
 brew "lua"
 brew "lua@5.1"
 brew "mas"
 brew "memcached"
 brew "mercurial"
-brew "mysql", restart_service: true
-brew "mysql@5.7", restart_service: true, link: true
 brew "neovim"
+brew "node"
 brew "openssl@1.1"
-brew "perl", args: ["HEAD"]
-brew "pkg-config"
+brew "perl"
 brew "plantuml"
 brew "postgresql"
 brew "redis"
-brew "ruby", link: true
+brew "ruby"
 brew "ruby-build", args: ["HEAD"]
 brew "ruby-install", args: ["HEAD"]
 brew "rust"
@@ -104,13 +100,15 @@ brew "wine"
 brew "winetricks"
 brew "yarn"
 brew "zlib"
-brew "fd"
-brew "zsh", args: ["with-gdbm", "with-pcre"]
+brew "zsh"
+brew "zsh-autosuggestions"
+brew "zsh-completions"
 brew "zsh-syntax-highlighting"
 brew "burntsushi/ripgrep/ripgrep-bin"
+brew "sambadevi/powerlevel9k/powerlevel9k"
 brew "shopify/shopify/ejson"
 brew "shopify/shopify/libzookeeper"
-brew "shopify/shopify/mysql-client", link: false
+brew "shopify/shopify/mysql-client"
 brew "shopify/shopify/shopify-graphicsmagick", args: ["HEAD"]
 brew "shopify/shopify/shopify-imagemagick@6", link: true
 brew "shopify/shopify/shopify-ruby"
@@ -121,17 +119,25 @@ cask "font-iosevka"
 cask "font-source-code-pro"
 cask "gitify"
 cask "google-cloud-sdk"
+cask "java"
 cask "mono-mdk"
+cask "plex-media-player"
 cask "sonarr"
+cask "shopify/shopify/phantomjs"
 mas "Affinity Photo", id: 824183456
+mas "ClamXav", id: 430207028
+mas "Evernote", id: 406056744
 mas "Keynote", id: 409183694
+mas "LimeChat", id: 414030210
 mas "Monosnap", id: 540348655
 mas "Notability", id: 736189492
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
+mas "Paprika Recipe Manager 3", id: 1303222628
 mas "PCalc", id: 403504866
 mas "SketchBook", id: 863486266
 mas "Slack", id: 803453959
 mas "The Unarchiver", id: 425424353
+mas "Todoist", id: 585829637
 mas "Wake Up Time", id: 495945638
 mas "YubiKey Personalization Tool", id: 638161122
