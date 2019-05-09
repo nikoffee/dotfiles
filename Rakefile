@@ -267,12 +267,12 @@ def install_files(files, dir: '', method: :symlink)
     file = f.split('/').last
     file = '.' + file if dir.empty?
     source = "#{File.join(ROOT, f)}"
-    target = "#{File.expand_path(File.join("~", dir, file))}"
+    target = "#{File.expand_path(File.join('~', dir, file))}"
 
     if File.exists?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
       puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
       sh %{
-        mv "#{File.expand_path(File.join("~", dir, file))}" "#{File.expand_path(File.join("~", dir, "#{file}.backup"))}
+        mv "#{File.expand_path(File.join('~', dir, file))}" "#{File.expand_path(File.join('~', dir, "#{file}.backup"))}"
       }
     end
 
