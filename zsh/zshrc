@@ -159,7 +159,6 @@ reset_touchbar() {
 killall ControlStrip
 }
 
-
 # PATHS
 fpath=(/usr/local/share/zsh-completions $fpath)
 
