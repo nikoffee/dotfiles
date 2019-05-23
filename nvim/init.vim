@@ -11,6 +11,7 @@ else
 endif
 
 set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=/usr/local/opt/fzf
 let s:bundle_dir=expand("$HOME/.cache/dein")
 
 " ======== Python =========
@@ -25,8 +26,6 @@ if dein#load_state(s:bundle_dir)
   call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/echodoc.vim')
-
-  call dein#add('junegunn/fzf')
 
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
   call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
