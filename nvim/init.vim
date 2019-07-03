@@ -265,9 +265,11 @@ set winheight=30
 
 " Only Delete Buffer, keep layout.
 function! DeleteBufferKeepLayout()
-  :lclose<bar>b#<bar>bd #<CR>
+  :lclose
+  :b #
+  :bd #
 endfunction
-nnoremap <silent> <leader>q :call DeleteBufferKeepLayout()<CR>
+nnoremap <silent> <leader>q :call DeleteBufferKeepLayout()<cr>
 
 " Show Rails Routes
 function! ShowRoutes()
