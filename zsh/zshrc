@@ -51,10 +51,6 @@ fi
 
 export SHOPIFY_HOME=$HOME/src/github.com/Shopify
 
-if which ruby >/dev/null && which gem >/dev/null; then
-    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
-fi
-
 export PATH="$PATH:$HOME/.cargo/bin"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:$PATH"
