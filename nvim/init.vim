@@ -119,9 +119,14 @@ set sidescroll=5
 
 silent! helptags ALL
 
+" LANGUAGE SPECIFIC autocmd -- Folding/Indent
 autocmd FileType ruby,haml,eruby,yaml,html,sass,cucumber set expandtab ai smartindent sw=2 sts=2 et
 autocmd FileType python set sw=4 sts=4 et
 autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" OTHERS
 
 nnoremap Q @q
 let mapleader=";"
