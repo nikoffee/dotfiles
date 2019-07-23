@@ -32,7 +32,6 @@ if dein#load_state(s:bundle_dir)
 
 """ Auto completion & Linting
   call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
-  " call dein#add('w0rp/ale') " Async Lint Engine
   call dein#add('tpope/vim-endwise') " ruby end autocompletion
 
 """ Language Client/Servers related
@@ -359,57 +358,6 @@ if has ('autocmd') " Remain compatible with earlier versions
   augroup END
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""
-" OMNIFUNC
-"""""""""""""""""""""""""""""""""""""""""""
-
-"augroup omnifuncs
-  "autocmd!
-  "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"augroup end
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ALE
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"set completeopt=menu,menuone,preview,noselect,noinsert
-
-"let g:ale_fixers = {
-"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-"\   'javascript': ['eslint', 'prettier'],
-"\   'ruby': ['rubocop'],
-"\   'rust': ['rustfmt'],
-"\   'coffeescript': ['coffee', 'coffeelint'],
-"\   'erb': ['erb', 'erubi'],
-"\   'graphql': ['eslint', 'gqlint', 'prettier'],
-"\   'html': ['prettier'],
-"\   'idris': ['idris'],
-"\   'json': ['prettier'],
-"\   'markdown': ['prettier'],
-"\   'yaml': ['prettier'],
-"\}
-
-"let g:ale_linters = {
-      "\ 'ruby': ['rubocop', 'solargraph'],
-      "\ 'javascript': ['eslint'],
-      "\}
-
-"let g:airline#extensions#ale#enabled = 1
-"let g:ale_close_preview_on_insert = 1
-"let g:ale_completion_enabled = 1
-"let g:ale_ruby_solargraph_executable = 'solargraph'
-"let g:ale_ruby_rubocop_executable = 'rubocop'
-"let g:ale_cursor_detail = 1
-"let g:ale_fix_on_save = 1
-"let g:ale_list_vertical = 1
-"let g:ale_enabled = 1
-
-"inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
-
 """"""""""""""""""""""""""""""""""""""""""""
 " LanguageClient-neovim
 """"""""""""""""""""""""""""""""""""""""""""
@@ -448,6 +396,12 @@ let g:NERDToggleCheckAllLines = 1
 " coc Language Server Protocol Configs
 """""""""""""""""""""
 autocmd FileType json syntax match Comment +\/\/.\+$+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 """""""""""""""""""""
 " echodoc plugin configs
