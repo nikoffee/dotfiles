@@ -23,7 +23,6 @@ if dein#load_state(s:bundle_dir)
   call dein#begin(s:bundle_dir)
 
   call dein#add(s:bundle_dir . '/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' })
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/echodoc.vim')
 
@@ -33,11 +32,11 @@ if dein#load_state(s:bundle_dir)
 
 """ Auto completion & Linting
   call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
-  call dein#add('w0rp/ale') " Async Lint Engine
+  " call dein#add('w0rp/ale') " Async Lint Engine
   call dein#add('tpope/vim-endwise') " ruby end autocompletion
 
 """ Language Client/Servers related
-"  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' })
+call dein#add('neoclide/coc.nvim', {'merge':0, 'build': 'yarn install --frozen-lockfile'})
 
 """ IDE feature & management
   call dein#add('majutsushi/tagbar') " project structure via tags
@@ -364,65 +363,52 @@ endif
 " OMNIFUNC
 """""""""""""""""""""""""""""""""""""""""""
 
-augroup omnifuncs
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-augroup end
+"augroup omnifuncs
+  "autocmd!
+  "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"augroup end
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ALE
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set completeopt=menu,menuone,preview,noselect,noinsert
+"set completeopt=menu,menuone,preview,noselect,noinsert
 
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint', 'prettier'],
-\   'ruby': ['rubocop'],
-\   'rust': ['rustfmt'],
-\   'coffeescript': ['coffee', 'coffeelint'],
-\   'erb': ['erb', 'erubi'],
-\   'graphql': ['eslint', 'gqlint', 'prettier'],
-\   'html': ['prettier'],
-\   'idris': ['idris'],
-\   'json': ['prettier'],
-\   'markdown': ['prettier'],
-\   'yaml': ['prettier'],
-\}
+"let g:ale_fixers = {
+"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\   'javascript': ['eslint', 'prettier'],
+"\   'ruby': ['rubocop'],
+"\   'rust': ['rustfmt'],
+"\   'coffeescript': ['coffee', 'coffeelint'],
+"\   'erb': ['erb', 'erubi'],
+"\   'graphql': ['eslint', 'gqlint', 'prettier'],
+"\   'html': ['prettier'],
+"\   'idris': ['idris'],
+"\   'json': ['prettier'],
+"\   'markdown': ['prettier'],
+"\   'yaml': ['prettier'],
+"\}
 
-let g:ale_linters = {
-      \ 'ruby': ['rubocop', 'solargraph'],
-      \ 'javascript': ['eslint'],
-      \}
+"let g:ale_linters = {
+      "\ 'ruby': ['rubocop', 'solargraph'],
+      "\ 'javascript': ['eslint'],
+      "\}
 
-let g:airline#extensions#ale#enabled = 1
-let g:ale_close_preview_on_insert = 1
-let g:ale_completion_enabled = 1
-let g:ale_ruby_solargraph_executable = 'solargraph'
-let g:ale_ruby_rubocop_executable = 'rubocop'
-let g:ale_cursor_detail = 1
-let g:ale_fix_on_save = 1
-let g:ale_list_vertical = 1
-let g:ale_enabled = 1
+"let g:airline#extensions#ale#enabled = 1
+"let g:ale_close_preview_on_insert = 1
+"let g:ale_completion_enabled = 1
+"let g:ale_ruby_solargraph_executable = 'solargraph'
+"let g:ale_ruby_rubocop_executable = 'rubocop'
+"let g:ale_cursor_detail = 1
+"let g:ale_fix_on_save = 1
+"let g:ale_list_vertical = 1
+"let g:ale_enabled = 1
 
-inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
-
-""""""""""""""""""""""""""""
-"" Deoplete
-""""""""""""""""""""""""""
-
-let g:deoplete#enable_at_startup = 1
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-let g:deoplete#keyword_patterns = {}
-if !exists('g:deoplete#omni#input_patterns')
-  let g:deoplete#omni#input_patterns = {}
-endif
-autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
+"inoremap <silent> <C-Space> <C-\><C-O>:ALEComplete<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""
 " LanguageClient-neovim
@@ -448,3 +434,24 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 let g:gutentags_plus_switch = 1
 let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+""""""""""""""""""""
+" NERDCommenter
+""""""""""""""""""""
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDToggleCheckAllLines = 1
+
+"""""""""""""""""""""
+" coc Language Server Protocol Configs
+"""""""""""""""""""""
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+"""""""""""""""""""""
+" echodoc plugin configs
+"""""""""""""""""""""
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+highlight link EchoDocFloat Pmenu
