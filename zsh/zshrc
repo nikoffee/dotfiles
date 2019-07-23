@@ -125,8 +125,16 @@ brewit() {
 }
 
 git_clean_merged_branches() {
-  echo -e "\e[93mNow cleaning all local git branches that have been merged into master on the remote.. \e[0m"
-  git branch --merged master --no-color | grep -v '^* master$' | xargs -n1 git branch -d
+  echo -e "\e[93mLooking to cleanup merged branches..\e[0m"
+  local result=$(git branch --merged master --no-color | grep -v '^* master$')
+  echo -e $result
+  read -q "CHOICE?Do you want to delete these branches (y/n)?"
+  echo
+  case "$CHOICE" in
+    y|Y ) echo $result | xargs -n1 git branch -d;;
+    n|N ) echo "No branches deleted. Thank you";;
+    * ) echo "Wat?";;
+  esac
 }
 
 alias be="bundle exec"

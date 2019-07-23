@@ -27,33 +27,40 @@ if dein#load_state(s:bundle_dir)
   call dein#add('Shougo/vimproc.vim', { 'build': 'make' })
   call dein#add('Shougo/echodoc.vim')
 
-  call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
-  call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
+""" Syntax Highlighting
   call dein#add('othree/yajs.vim') " Better js lexical highlighting
+  call dein#add('rust-lang/rust.vim') " rust integration
 
+""" Auto completion & Linting
+  call dein#add('sheerun/vim-polyglot') " pack of ~150 languages
   call dein#add('w0rp/ale') " Async Lint Engine
+  call dein#add('tpope/vim-endwise') " ruby end autocompletion
+
+""" Language Client/Servers related
 "  call dein#add('autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': './install.sh' })
 
+""" IDE feature & management
+  call dein#add('majutsushi/tagbar') " project structure via tags
+  call dein#add('ludovicchabant/vim-gutentags') " ctags management
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
-
-  call dein#add('vim-airline/vim-airline') " airline plugin for UX
-  call dein#add('vim-airline/vim-airline-themes') " themes from airline
-
   call dein#add('brooth/far.vim') " search replace utility
+  call dein#add('mhinz/vim-grepper') " enhanced grepping (using chosen utility: ag, rip grep)
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
 "  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
-
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('majutsushi/tagbar') " project structure via tags
-  call dein#add('tpope/vim-fugitive') " needed for airline branch
-  call dein#add('tpope/vim-endwise') " ruby end autocompletion
-  call dein#add('mhinz/vim-grepper')
-
-  call dein#add('bling/vim-bufferline') " show buffers open in airline
   call dein#add('rizzatti/dash.vim') " dash integration
-  call dein#add('rust-lang/rust.vim') " rust integration
+
+""" Source code Management
+  call dein#add('tpope/vim-fugitive') " control Git inside neovim
+
+""" Vim UI
+  call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
+  call dein#add('vim-airline/vim-airline') " airline plugin for UX
+  call dein#add('vim-airline/vim-airline-themes') " themes from airline
+  call dein#add('airblade/vim-gitgutter') " git UI for diff changes in the gutter
+  call dein#add('bling/vim-bufferline') " show open buffers with airline
   call dein#add('ryanoasis/vim-devicons') " Vim Icons - Always load last
+
   call dein#end()
   call dein#save_state()
 endif
@@ -417,7 +424,6 @@ endif
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 
-
 """"""""""""""""""""""""""""""""""""""""""""
 " LanguageClient-neovim
 """"""""""""""""""""""""""""""""""""""""""""
@@ -435,3 +441,10 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+
+""""""""""""""""""""
+" Gutentags Configs
+""""""""""""""""""""
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+let g:gutentags_plus_switch = 1
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
