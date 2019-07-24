@@ -47,6 +47,7 @@ call dein#add('neoclide/coc.nvim', {'merge':0, 'build': 'yarn install --frozen-l
   call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
 "  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
   call dein#add('rizzatti/dash.vim') " dash integration
+  call dein#add('janko/vim-test') " test from neovim
 
 """ Source code Management
   call dein#add('tpope/vim-fugitive') " control Git inside neovim
@@ -358,24 +359,6 @@ if has ('autocmd') " Remain compatible with earlier versions
   augroup END
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""
-" LanguageClient-neovim
-""""""""""""""""""""""""""""""""""""""""""""
-" let g:LanguageClient_serverCommands = {
-"    \ 'ruby': ['solargraph', 'stdio'],
-"    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
-"    \ 'javascript': ['/opt/javascript-typescript-langserver/lib/language-server-stdio.js'],
-"    \ }
-
-" Stop restarting Solargraph when restarting neovim
-" let g:LanguageClient_autoStop = 0
-
-" Automatically start language servers.
-" let g:LanguageClient_autoStart = 1
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
 """"""""""""""""""""
 " Gutentags Configs
 """"""""""""""""""""
@@ -398,8 +381,6 @@ let g:NERDToggleCheckAllLines = 1
 autocmd FileType json syntax match Comment +\/\/.\+$+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 
 """""""""""""""""""""
 " echodoc plugin configs
@@ -407,3 +388,10 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'floating'
 highlight link EchoDocFloat Pmenu
+
+""""""""""""""""""""""
+" vim-test
+""""""""""""""""""""""
+let test#strategy = "vimproc"
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
