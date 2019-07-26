@@ -363,8 +363,6 @@ endif
 " Gutentags Configs
 """"""""""""""""""""
 let g:gutentags_cache_dir = expand('~/.cache/tags')
-let g:gutentags_plus_switch = 1
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
 
 """"""""""""""""""""
 " NERDCommenter
@@ -380,7 +378,7 @@ let g:NERDToggleCheckAllLines = 1
 """""""""""""""""""""
 " Better message display
 set cmdheight=2
-set updatetime=300
+"set updatetime=300
 set shortmess+=c
 set signcolumn=yes
 
@@ -426,7 +424,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Rename current word
-nmap <leader>rn <Plug>(coc-rename)
+nnoremap <leader>cr <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
