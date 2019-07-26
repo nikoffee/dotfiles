@@ -26,7 +26,7 @@
 [push]
   default = simple
 [core]
-  excludesfile = ~/.gitignore_global
+	excludesfile = /Users/greg/.config/git/ignore
   autocrlf = input
 [help]
   autocorrect = 1
