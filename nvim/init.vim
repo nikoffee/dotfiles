@@ -68,6 +68,9 @@ if dein#check_install()
   call dein#install()
 endif
 
+nnoremap Q @q
+let mapleader=";"
+
 filetype plugin indent on
 syntax enable
 
@@ -131,11 +134,6 @@ autocmd FileType python set sw=4 sts=4 et
 autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent nocindent
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-" OTHERS
-
-nnoremap Q @q
-let mapleader=";"
 
 " Copy visual selection, Paste
 vnoremap <leader>y "+y
@@ -384,10 +382,7 @@ set signcolumn=yes
 
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Backspace function
@@ -398,10 +393,6 @@ endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -424,7 +415,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Rename current word
-nnoremap <leader>cr <Plug>(coc-rename)
+nmap <leader>cr <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
