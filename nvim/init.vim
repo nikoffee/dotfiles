@@ -39,7 +39,6 @@ call dein#add('neoclide/coc.nvim', {'merge':0, 'build': 'yarn install --frozen-l
 
 """ IDE feature & management
   call dein#add('majutsushi/tagbar') " project structure via tags
-  call dein#add('ludovicchabant/vim-gutentags') " ctags management
   call dein#add('scrooloose/nerdtree') " vim directory navigation
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('brooth/far.vim') " search replace utility
@@ -356,11 +355,6 @@ if has ('autocmd') " Remain compatible with earlier versions
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif
-
-""""""""""""""""""""
-" Gutentags Configs
-""""""""""""""""""""
-let g:gutentags_cache_dir = expand('~/.cache/tags')
 
 """"""""""""""""""""
 " NERDCommenter
