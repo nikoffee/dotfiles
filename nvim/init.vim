@@ -370,8 +370,8 @@ let g:NERDToggleCheckAllLines = 1
 """""""""""""""""""""
 " Better message display
 set cmdheight=2
-"set updatetime=300
-set shortmess+=c
+set updatetime=600
+set shortmess+=a
 set signcolumn=yes
 
 
