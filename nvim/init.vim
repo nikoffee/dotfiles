@@ -134,6 +134,9 @@ autocmd! FileType javascript set sw=2 sts=2 expandtab autoindent smartindent noc
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+" Fix paste bug: https://github.com/neovim/neovim/issues/7994
+au InsertLeave * set nopaste
+
 " Copy visual selection, Paste
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+yg_
@@ -264,12 +267,6 @@ let g:ctrlp_working_path_mode = 'ra'
 """" ==== DestroyAllSoftware
 " type current dir path
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
-
-" Manage win size
-set winwidth=84
-set winheight=5
-set winminheight=5
-set winheight=30
 
 " Only Delete Buffer, keep layout.
 function! DeleteBufferKeepLayout()
