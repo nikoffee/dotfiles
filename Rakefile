@@ -146,10 +146,6 @@ task :setup_powerline do
   }
 end
 
-desc "Setup a dark theme for slack"
-task :setup_dark_slack do
-end
-
 task :default => :install
 
 private
