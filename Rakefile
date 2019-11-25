@@ -34,7 +34,7 @@ end
 
 desc "Setup Shopify dev"
 task :setup_dev do
-  sh %{ eval "$(curl -fsSL https://dev.shopify.io/up)" } unless File.exists?("/opt/dev")
+  sh %{ eval "$(curl -fsSL https://dev.shopify.io/up)" } unless File.exist?("/opt/dev")
   puts "Call config set ssh.key ~/.ssh/id_rsa_sorryeh"
   text = <<~TEXT
     ==================================
@@ -66,6 +66,7 @@ end
 desc "Link all the dotfiles"
 task :link_dotfiles do
   install_files Dir.glob("nvim/*"), dir: '.config/nvim/'
+  install_files Dir.glob("solargraph/*"), dir: '.config/solargraph'
   install_files Dir.glob("git/*")
   install_files Dir.glob("irb/*")
   install_files Dir.glob("ruby/*")
@@ -125,9 +126,9 @@ task :install_dein do
   puts "Installing and updating dein."
 
   dein_path = File.expand_path(File.join("~", ".cache", "dein"))
-  FileUtils.mkdir_p(dein_path) unless File.exists? dein_path
+  FileUtils.mkdir_p(dein_path) unless File.exist? dein_path
 
-  unless File.exists?(File.join(dein_path, "installer.sh"))
+  unless File.exist?(File.join(dein_path, "installer.sh"))
     dein_installer_path = File.join(dein_path, "installer.sh")
     sh %{
       curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > #{dein_installer_path}
@@ -172,7 +173,7 @@ def generate_ssh(account:, email:)
     CONFIG
   end
 
-  unless File.exists?(account_path)
+  unless File.exist?(account_path)
     sh %{ ssh-keygen -t rsa -b 4096 -f "#{account_path}" -C "#{email}" }
     sh %{ eval "$(ssh-agent -s)" }
     sh %{ echo "#{ssh_config}" >> #{ssh_config_path} }
@@ -242,13 +243,13 @@ end
 
 def install_iterm_theme
   iterm_plist_path = File.join(ROOT, "iterm", "com.googlecode.iterm2.plist")
-  return unless File.exists?(iterm_plist_path)
+  return unless File.exist?(iterm_plist_path)
   sh %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
   sh %{ defaults read com.googlecode.iterm2 }
 end
 
 def install_omz
-  if File.exists?(File.expand_path("~/.oh-my-zsh"))
+  if File.exist?(File.expand_path("~/.oh-my-zsh"))
     sh "upgrade_oh_my_zsh"
   else
     sh %{
@@ -259,23 +260,26 @@ def install_omz
 end
 
 def install_files(files, dir: '', method: :symlink)
+  target_dir = File.join(Dir.home, dir)
+  unless dir.empty? || Dir.exist?(target_dir)
+    Dir.mkdir(target_dir)
+  end
+
   files.each do |f|
     file = f.split('/').last
-    file = '.' + file if dir.empty?
-    source = "#{File.join(ROOT, f)}"
-    target = "#{File.expand_path(File.join('~', dir, file))}"
+    file = '.' << file if dir.empty?
+    source_file = File.join(ROOT, f)
+    target_file = File.join(target_dir, file)
 
-    if File.exists?(target) && (!File.symlink?(target) || (File.symlink?(target) && File.readlink(target) != source))
-      puts "[Overwriting] #{target}...leaving original at #{target}.backup..."
-      sh %{
-        mv "#{File.expand_path(File.join('~', dir, file))}" "#{File.expand_path(File.join('~', dir, "#{file}.backup"))}"
-      }
+    if File.exist?(target_file) && (!File.symlink?(target_file) || (File.symlink?(target_file) && File.readlink(target_file) != source_file))
+      puts "[Renaming #{target}] appending '.backup' to file"
+      File.rename(target_file, target_file + '.backup')
     end
 
     if method == :symlink
-      sh %{ ln -nfs "#{source}" "#{target}" }
+      sh %{ ln -nfs "#{source_file}" "#{target_file}" }
     else
-      sh %{ cp -f "#{source}" "#{target}" }
+      sh %{ cp -f "#{source_file}" "#{target_file}" }
     end
   end
 end
@@ -287,7 +291,7 @@ def setup_neovim
   sh "gem install --user-install neovim"
   sh "npm install -g neovim"
 
-  FileUtils.mkdir_p(File.expand_path("~/.config/nvim/")) unless File.exists?(File.expand_path("~/.config/nvim"))
+  FileUtils.mkdir_p(File.expand_path("~/.config/nvim/")) unless File.exist?(File.expand_path("~/.config/nvim"))
 end
 
 def cask_install(app)
