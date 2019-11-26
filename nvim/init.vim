@@ -168,6 +168,7 @@ let g:airline#extensions#whitespace#mixed_indent_algo = 0
 let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing', 'long', 'mixed-indent-file' ]
 
 let g:airline#extensions#whitespace#show_message = 1
+let g:airline#extensions#ale#enabled = 1
 
 " let g:airline#extensions#neomake#enabled = 1
 
@@ -368,8 +369,6 @@ let g:NERDToggleCheckAllLines = 1
 """""""""""""""""""""
 " Better message display
 set cmdheight=2
-set updatetime=600
-set shortmess+=a
 set signcolumn=yes
 
 
@@ -473,6 +472,11 @@ augroup ale_config
   autocmd!
   nnoremap <leader>af <Plug>(ale_fix)
   nnoremap <leader>al <Plug>(ale_lint)
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 1
+  let g:ale_open_list = 1
+  let g:ale_keep_list_window_open = 1
+  let g:ale_list_vertical = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave = 0
