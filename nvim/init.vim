@@ -371,6 +371,7 @@ let g:NERDToggleCheckAllLines = 1
 set cmdheight=2
 set signcolumn=yes
 
+let g:coc_node_path = '/usr/local/bin/node'
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
@@ -412,17 +413,6 @@ nmap <leader>cr <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
 
@@ -454,7 +444,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 " echodoc plugin configs
 """""""""""""""""""""
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
+let g:echodoc#type = 'echo'
 highlight link EchoDocFloat Pmenu
 
 """"""""""""""""""""""
@@ -476,7 +466,6 @@ augroup ale_config
   let g:ale_set_quickfix = 1
   let g:ale_open_list = 1
   let g:ale_keep_list_window_open = 1
-  let g:ale_list_vertical = 1
   let g:ale_lint_on_text_changed = 'never'
   let g:ale_lint_on_enter = 0
   let g:ale_lint_on_insert_leave = 0
