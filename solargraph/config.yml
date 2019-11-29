@@ -13,4 +13,4 @@ reporters:
 - rubocop
 - require_not_found
 plugins: []
-max_files: 25000
+max_files: 10000
