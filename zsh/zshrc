@@ -126,7 +126,7 @@ brewit() {
 
 git_clean_merged_branches() {
   echo -e "\e[93mLooking to cleanup merged branches..\e[0m"
-  local result=$(git branch --merged master --no-color | grep -v '^ *master$')
+  local result=$(git branch --merged master --no-color | grep -v '^* master$')
   echo -e $result
   read -q "CHOICE?Do you want to delete these branches (y/n)?"
   echo
