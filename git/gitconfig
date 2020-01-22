@@ -74,7 +74,7 @@
   unhide = update-index --no-assume-unchanged
   ignored = !git status -s --ignored | grep \"^!!\"
   delete-tag = "!git push origin :refs/tags/$1;"
-  create-tag = "!git tag -fa $1; !git push origin master --tags"
+  create-tag = "!git tag -fa $1; git push origin master --tags"
 [protocol]
   version = 2
   recent-branches = !git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'
