@@ -1,67 +1,45 @@
-export DEFAULT_USER="greg"
-#ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
-########################
-## POWERLEVEL9K configuration
-########################
+export ZSH=$HOME/.oh-my-zsh
 
-POWERLEVEL9K_CONTEXT_TEMPLATE='%n'
-POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='white'
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time background_jobs)
+source $ZSH/oh-my-zsh.sh
 
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-POWERLEVEL9K_TIME_FORMAT="%D{\uf017 %H:%M \uf073 %d/%m/%y}"
-POWERLEVEL9K_TIME_BACKGROUND='white'
-
-#########################
-# Finished
-#########################
+export DEFAULT_USER="greghoule"
 
 # 10 second wait before delete everything.
 setopt RM_STAR_WAIT
 
 COMPLETION_WAITING_DOTS="true"
-plugins=(brew colored-man-pages colorize cp history sudo web-search pip forklift osx python rsync screen tmux gnu-utils mosh git)
+plugins=(battery brew bundler cabal chruby cloudapp cloudfoundry colored-man-pages colorize command-not-found common-aliases cp dash dircycle docker dotenv emoji encode64 fd firewalld fzf gcloud gem git-escape-magic git-extras git-prompt git-remote-branch git github gitignore gnu-utils go golang gpg-agent history-substring-search history iterm2 kubectl man mosh nmap node npm nvm osx pep8 pip pipenv pyenv pylint python rake-fast rake rbenv redis-cli ripgrep rsync ruby rust rvm screen ssh-agent sudo systemd tmux virtualenv vscode web-search yarn zsh_reload)
 
-export ZSH=$HOME/.oh-my-zsh
-source $ZSH/oh-my-zsh.sh
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig
+export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig"
 
 if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
   source /opt/dev/dev.sh
 fi
 
-ssh-add -A
-
 export GREP_OPTIONS='--color=auto'
 export EDITOR="nvim"
 export GIT_EDITOR="nvim"
 
-if [ -f "$HOME/.bashrc" ]; then
-  source "$HOME/.bashrc"
-fi
-
-if [ -f "$HOME/.profile" ]; then
-  source "$HOME/.profile"
-fi
+if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profile/etc/profile.d/nix.sh; fi
 
 export SHOPIFY_HOME=$HOME/src/github.com/Shopify
-
-export PATH="$PATH:$HOME/.cargo/bin"
-export PATH="/usr/local/bin:$PATH"
-export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:$PATH"
 export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
-ZSH_THEME=powerlevel9k/powerlevel9k
-
-#export PYTHONPATH="/usr/local/lib/python3.7/site-packages:$PYTHONPATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export GOPATH=$HOME
-export PATH=$GOPATH/bin:$PATH
+
+export PATH="/usr/local/bin:/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:/usr/local/opt/python/libexec/bin:$PATH:$HOME/.cargo/bin"
+export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
 
 alias pip="pip3"
 # pip zsh completion start
@@ -74,7 +52,6 @@ function _pip_completion {
              PIP_AUTO_COMPLETE=1 $words[1] ) )
 }
 compctl -K _pip_completion pip3
-# pip zsh completion end
 
 # kubectl autocomplete
 if [ $commands[kubectl] ]; then

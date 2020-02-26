@@ -34,7 +34,7 @@ end
 
 desc "Setup Shopify dev"
 task :setup_dev do
-  sh %{ eval "$(curl -fsSL https://dev.shopify.io/up)" } unless File.exist?("/opt/dev")
+  sh %{ eval "$(curl -fsSL https://up.dev)" } unless File.exist?("/opt/dev")
   puts "Call config set ssh.key ~/.ssh/id_rsa_sorryeh"
   text = <<~TEXT
     ==================================
@@ -72,7 +72,6 @@ task :link_dotfiles do
   install_files Dir.glob("ruby/*")
   install_files Dir.glob("vim/*")
   install_files Dir.glob("python/*")
-  install_files Dir.glob("sh/*")
   install_files Dir.glob("zsh/*")
 end
 
@@ -85,11 +84,11 @@ task :install_mac_apps do
   cask_install "alfred"
   cask_install "fantastical"
   cask_install "bartender"
-  cask_install "1password"
-  cask_install "evernote"
-  cask_install "slack"
-  cask_install "google-chrome"
-  cask_install "the-unarchiver"
+  # cask_install "1password"
+  # cask_install "evernote"
+  # cask_install "slack"
+  # cask_install "google-chrome"
+  # cask_install "the-unarchiver"
   sh "mas install 540348655" # Monosnap
   sh "mas install 824183456" # affinity photo
   sh "mas install 638161122" # Yubikey
@@ -99,7 +98,7 @@ task :install_mac_apps do
   cask_install "omnigraffle"
   cask_install "kaleidoscope"
   cask_install "spectacle"
-  cask_install "iterm2"
+  #cask_install "iterm2"
   cask_install "sonarr"
   cask_install "ivpn"
   cask_install "transmission"
@@ -140,10 +139,8 @@ end
 desc "Setup Powerline for oh-my-zsh"
 task :setup_powerline do
   sh %{
-    brew tap sambadevi/powerlevel9k
-    brew install powerlevel9k
-    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-    echo "ZSH_THEME=\"powerlevel9k/powerlevel9k\"" >> ~/.zshrc
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
+    echo "ZSH_THEME=\"powerlevel10k/powerlevel10k\"" >> ~/.zshrc
   }
 end
 
@@ -244,7 +241,7 @@ end
 def install_iterm_theme
   iterm_plist_path = File.join(ROOT, "iterm", "com.googlecode.iterm2.plist")
   return unless File.exist?(iterm_plist_path)
-  sh %{ cp -f "#{iterm_plist_path}" "#{File.expand_path("~/Library/Preferences/")}"}
+  sh %{ cp -f "#{iterm_plist_path}" "#{File.expand_path('~/Library/Preferences/')}"}
   sh %{ defaults read com.googlecode.iterm2 }
 end
 
@@ -272,7 +269,7 @@ def install_files(files, dir: '', method: :symlink)
     target_file = File.join(target_dir, file)
 
     if File.exist?(target_file) && (!File.symlink?(target_file) || (File.symlink?(target_file) && File.readlink(target_file) != source_file))
-      puts "[Renaming #{target}] appending '.backup' to file"
+      puts "[Renaming #{target_file}] appending '.backup' to file"
       File.rename(target_file, target_file + '.backup')
     end
 

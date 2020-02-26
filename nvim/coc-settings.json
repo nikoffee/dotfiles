@@ -1,1 +1,16 @@
-/Users/greg/.config/nvim/coc-settings.json
+{
+  // Solargraph
+  //"solargraph.commandPath": "$HOME/.gem/ruby/2.6.5/bin/solargraph",
+  "solargraph.useBundler": false,
+  "solargraph.hover": true,
+  "solargraph.formatting": true,
+  "solargraph.definitions": true,
+  "solargraph.references": true,
+  "solargraph.completion": true,
+  "solargraph.rename": true,
+  "solargraph.symbols": true,
+  "suggest.echodocSupport": true,
+  "suggest.timeout": 1000,
+  "suggest.maxCompleteItemCount": 10,
+  "diagnostic.displayByAle": true
+}

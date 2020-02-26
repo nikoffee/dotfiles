@@ -1,5 +1,0 @@
-if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
-
-export PATH="$HOME/.cargo/bin:$PATH"
-source ~/.zshrc
-if [ -e /Users/greg/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/greg/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
