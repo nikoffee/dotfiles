@@ -1,7 +1,7 @@
 [include]
-  path = "/Users/greghoule/.work.gitconfig"
+  path = "/Users/greg/.work.gitconfig"
 [includeIf "gitdir/i:~/src/github.com/nikoffee/**"]
-  path = "/Users/greghoule/.home.gitconfig"
+  path = "/Users/greg/.home.gitconfig"
 
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
@@ -26,7 +26,7 @@
 [push]
   default = simple
 [core]
-	excludesfile = /Users/greghoule/.config/git/ignore
+	excludesfile = /Users/greg/.config/git/ignore
   autocrlf = input
 	commitGraph = true
 [help]

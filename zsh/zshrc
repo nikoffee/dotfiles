@@ -13,7 +13,7 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-export DEFAULT_USER="greghoule"
+export DEFAULT_USER="greg"
 
 # 10 second wait before delete everything.
 setopt RM_STAR_WAIT

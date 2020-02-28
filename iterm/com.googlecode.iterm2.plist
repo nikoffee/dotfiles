@@ -48080,7 +48080,7 @@
 			<key>Window Type</key>
 			<integer>1</integer>
 			<key>Working Directory</key>
-			<string>/Users/greghoule</string>
+			<string>/Users/greg</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -48741,7 +48741,7 @@
 			<key>Window Type</key>
 			<integer>1</integer>
 			<key>Working Directory</key>
-			<string>/Users/greghoule</string>
+			<string>/Users/greg</string>
 		</dict>
 	</array>
 	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
