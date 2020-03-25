@@ -52,8 +52,13 @@ if dein#load_state(s:bundle_dir)
 """ Source code Management
   call dein#add('tpope/vim-fugitive') " control Git inside neovim
 
+""" Generic Useful
+  call dein#add('tpope/vim-unimpaired') " Adds pair of shortcuts (like toggle)
+
 """ Vim UI
   call dein#add('mhartington/oceanic-next') " Oceanic Next colorscheme
+  call dein#add('joshdick/onedark.vim') " One Dark (similar to Atom One)
+  call dein#add('NLKNguyen/papercolor-theme') " Papercolor light/dark theme
   call dein#add('vim-airline/vim-airline') " airline plugin for UX
   call dein#add('vim-airline/vim-airline-themes') " themes from airline
   call dein#add('airblade/vim-gitgutter') " git UI for diff changes in the gutter
@@ -77,7 +82,6 @@ syntax enable
 set t_Co=256
 set encoding=UTF-8
 set title
-set background=dark
 set number
 set relativenumber
 set history=10000
@@ -173,12 +177,16 @@ let g:airline#extensions#ale#enabled = 1
 " let g:airline#extensions#neomake#enabled = 1
 
 " ====== Looks and FEELS =======
+set background=dark
+let g:airline_theme='papercolor'
 " let g:airline_theme='luna'
-let g:airline_theme='base16_spacemacs'
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-
-colorscheme OceanicNext
+" let g:airline_theme='base16_spacemacs'
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+" colorscheme OceanicNext
+" let g:onedark_terminal_italics = 1
+" colorscheme onedark
+colorscheme PaperColor
 
 " ==== Git Gutter ====
 let g:gitgutter_max_signs = 10000

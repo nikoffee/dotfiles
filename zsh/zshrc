@@ -146,3 +146,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/greghoule/.kube/config:/Users/greghoule/.kube/config.shopify.cloudplatform
+for file in /Users/greghoule/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
