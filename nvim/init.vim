@@ -44,8 +44,8 @@ if dein#load_state(s:bundle_dir)
   call dein#add('scrooloose/nerdcommenter') " hotkey for commenting code
   call dein#add('brooth/far.vim') " search replace utility
   call dein#add('mhinz/vim-grepper') " enhanced grepping (using chosen utility: ag, rip grep)
-  call dein#add('ctrlpvim/ctrlp.vim') " fuzzy finder / file nav
-"  call dein#add('nixprime/cpsm') " faster matcher for ctrlp
+  call dein#add('junegunn/fzf') " wrapper for fzf (fuzzy finder)
+  call dein#add('junegunn/fzf.vim')
   call dein#add('rizzatti/dash.vim') " dash integration
   call dein#add('janko/vim-test') " test from neovim
 
@@ -248,6 +248,9 @@ let g:grepper               = {
       \}
 "let command! Todo Grepper -tool git -query -E '(TODO|FIXME|XXX):'
 
+" ===== Fuzzy Finder fzf =====
+nnoremap <silent> <C-p> :FZF<CR>
+
 " ======= Dash App bindings =========
 :nmap <silent> <leader>d <Plug>DashSearch
 
@@ -256,23 +259,6 @@ let g:far#source = 'agnvim'
 
 " ===== Ag for Vim =====
 let g:ackprg = 'ag --nogroup --nocolor --column'
-
-" ======== CtrlP options =======
-let g:ctrlp_user_command = {
-      \'types': {
-        \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
-        \},
-      \ 'fallback': 'fd --type f --color=never "" %s',
-      \}
-let g:ctrlp_extensions = ['buffertag', 'undo', 'mixed']
-let g:ctrlp_match_window = 'bottom,order:ttb,min:1,max:15,results:30'
-" let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
-let g:ctrlp_use_caching = 0
-let g:ctrlp_working_path_mode = 'ra'
-
-" ======= CPSM options for CTRLP ========
-" let g:cpsm_match_empty_query = 0
-" let g:cpsm_highlight_mode = "detailed"
 
 """" ==== DestroyAllSoftware
 " type current dir path
