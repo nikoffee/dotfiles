@@ -61,6 +61,9 @@ fi
 #Neovim true color support
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+# Default fzf respect gitignore
+export FZF_DEFAULT_COMMAND='fd --type f'
+
 # Env Management w/ Shadowenv
 eval "$(shadowenv init zsh)"
 
@@ -118,28 +121,8 @@ git_clean_merged_branches() {
 alias be="bundle exec"
 alias ll="ls -AahloPS"
 
-# Networking Proxy Commands
-burp_proxy_on() {
-  networksetup -setwebproxystate 'Wi-Fi' on
-  networksetup -setsecurewebproxystate 'Wi-Fi' on
-}
-
-burp_proxy_off() {
-  networksetup -setwebproxystate 'Wi-Fi' off
-  networksetup -setsecurewebproxystate 'Wi-Fi' off
-}
-
-dns_clear() {
-  networksetup -setdnsservers 'Wi-Fi' nil
-}
-
-dns_google() {
-  networksetup -setdnsservers 'Wi-Fi' 8.8.8.8 8.8.4.4
-}
-
-reset_touchbar() {
-killall ControlStrip
-}
+autoload -Uz compinit
+compinit
 
 # PATHS
 fpath=(/usr/local/share/zsh-completions $fpath)

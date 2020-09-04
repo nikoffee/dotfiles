@@ -85,5 +85,9 @@
 	insteadOf = git@github.com:shopify/
 	insteadOf = ssh://git@github.com/Shopify/
 	insteadOf = ssh://git@github.com/shopify/
+[user]
+	name = Greg Houle
+	email = greg.houle@shopify.com
 [credential]
+	helper = 
 	helper = store --file /opt/dev/var/private/git_credential_store

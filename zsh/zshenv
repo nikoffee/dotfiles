@@ -2,3 +2,4 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=196'
+if [ -e /Users/greghoule/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/greghoule/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
