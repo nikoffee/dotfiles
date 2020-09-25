@@ -12,5 +12,6 @@
   "suggest.echodocSupport": true,
   "suggest.timeout": 1000,
   "suggest.maxCompleteItemCount": 10,
-  "diagnostic.displayByAle": true
+  "diagnostic.displayByAle": true,
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown"]
 }

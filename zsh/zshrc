@@ -36,9 +36,12 @@ if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then source $HOME/.nix-profil
 export SHOPIFY_HOME=$HOME/src/github.com/Shopify
 export DYLD_LIBRARY_PATH="/usr/local/opt/mysql-client/lib:$DYLD_LIBRARY_PATH"
 export GOPATH=$HOME
+export SDKROOT=`xcrun --show-sdk-path`
 
 export PATH="/usr/local/bin:/usr/local/opt/mysql-client/bin:/usr/local/opt/mysql@5.7/bin:/usr/local/opt/mysql/bin:/usr/local/opt/python/libexec/bin:$PATH:$HOME/.cargo/bin"
 export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 
 alias pip="pip3"

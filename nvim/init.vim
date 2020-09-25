@@ -403,12 +403,13 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Rename current word
 nmap <leader>cr <Plug>(coc-rename)
 
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
+
+" format region
+xmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
