@@ -237,7 +237,7 @@ nmap gs <plug>(GrepperOperator)
 xmap gs <plug>(GrepperOperator)
 
 let g:grepper               = {
-      \ 'tools': ['rg', 'git', 'ag'],
+      \ 'tools': ['ag', 'git'],
       \ 'jump': 1,
       \ 'highlight': 1,
       \ 'dir': 'repo,file',
