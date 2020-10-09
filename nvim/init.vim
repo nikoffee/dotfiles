@@ -36,7 +36,7 @@ if dein#load_state(s:bundle_dir)
   call dein#add('dense-analysis/ale')
 
 """ Language Client/Servers related
-  call dein#add('neoclide/coc.nvim', {'merge':0, 'build': 'yarn install --frozen-lockfile'})
+  call dein#add('neoclide/coc.nvim', { 'merged': 0, 'rev': 'release' })
 
 """ IDE feature & management
   call dein#add('majutsushi/tagbar') " project structure via tags

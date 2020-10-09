@@ -1,7 +1,8 @@
 {
   // Solargraph
   //"solargraph.commandPath": "$HOME/.gem/ruby/2.6.5/bin/solargraph",
-  "solargraph.useBundler": false,
+  "solargraph.useBundler": true,
+  "solargraph.bundlerPath": "$HOME/.gem/ruby/2.7.1/bin/bundler",
   "solargraph.hover": true,
   "solargraph.formatting": true,
   "solargraph.definitions": true,
