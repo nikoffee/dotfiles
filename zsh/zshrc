@@ -19,7 +19,7 @@ export DEFAULT_USER="greg"
 setopt RM_STAR_WAIT
 
 COMPLETION_WAITING_DOTS="true"
-plugins=(battery brew bundler cabal chruby cloudapp cloudfoundry colored-man-pages colorize command-not-found common-aliases cp dash dircycle docker dotenv emoji encode64 fd firewalld fzf gcloud gem git-escape-magic git-extras git-prompt git-remote-branch git github gitignore gnu-utils go golang gpg-agent history-substring-search history iterm2 kubectl man mosh nmap node npm nvm osx pep8 pip pipenv pyenv pylint python rake-fast rake rbenv redis-cli ripgrep rsync ruby rust rvm screen ssh-agent sudo systemd tmux virtualenv vscode web-search yarn zsh_reload)
+plugins=(battery brew bundler cabal chruby cloudfoundry colored-man-pages colorize command-not-found common-aliases cp dash dircycle docker dotenv emoji encode64 fd firewalld fzf gcloud gem git-escape-magic git-extras git-prompt git github gitignore gnu-utils golang gpg-agent history-substring-search history iterm2 kubectl man mosh nmap node npm nvm osx pep8 pip pipenv pyenv pylint python rake-fast rake rbenv redis-cli ripgrep rsync ruby rust rvm screen ssh-agent sudo systemd tmux virtualenv vscode web-search yarn zsh_reload)
 
 export PKG_CONFIG_PATH="/usr/local/lib/pkgconfig:/usr/local/opt/libxml2/lib/pkgconfig"
 
