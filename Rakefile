@@ -32,26 +32,11 @@ task :setup_work do
   Rake::Task[:setup_dev].execute
 end
 
-desc "Setup Shopify dev"
-task :setup_dev do
-  sh %{ eval "$(curl -fsSL https://up.dev)" } unless File.exist?("/opt/dev")
-  puts "Call config set ssh.key ~/.ssh/id_rsa_sorryeh"
-  text = <<~TEXT
-    ==================================
-    | $ dev clone onboarding-sandbox |
-    | $ dev up                       |
-    | Visit:                         |
-    |   https://authme.shopify.io/   |
-    ==================================
-  TEXT
-  puts text
-end
-
 desc "Setup ssh for github"
 task :setup_ssh do
   sh "mkdir -p ~/.ssh"
   generate_ssh(account: "nikoffee", email: "greg@thisisfine.coffee")
-  generate_ssh(account: "sorryeh", email: "greg.houle@shopify.com")
+  generate_ssh(account: "sorryeh", email: "houle.greg@gmail.com")
   sh %{ ssh-add -l }
 
   github_ssh_next_steps
@@ -92,9 +77,7 @@ task :install_mac_apps do
   sh "mas install 540348655" # Monosnap
   sh "mas install 824183456" # affinity photo
   sh "mas install 638161122" # Yubikey
-  sh "mas install 495945638" # Wake up time
   sh "mas install 736189492" # Notability
-  sh "mas install 414030210" # Limechat
   cask_install "omnigraffle"
   cask_install "kaleidoscope"
   cask_install "spectacle"
@@ -104,7 +87,6 @@ task :install_mac_apps do
   cask_install "transmission"
   cask_install "plex-media-player"
   cask_install "soda-player"
-  cask_install "tidal"
 
   cask_upgrade
 end
